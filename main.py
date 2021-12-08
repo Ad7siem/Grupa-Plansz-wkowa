@@ -6,7 +6,7 @@ from edit import edit_board_game
 from delete import delete_board_game
 # from query import *
 
-color_bg = '#3e3e3e'
+color_bg = '#3e3e3e' #'#9C9CA6'
 color_other = '#212121'
 
 color = '#212121'#'#2c2c2c'

@@ -6,17 +6,25 @@ def delete_board_game():
     global w_dBG
     w_dBG = Tk()
     w_dBG.title('Usuwanie planszówki')
-    w_dBG.geometry('320x80')
+    w_dBG.geometry('320x120')
+    w_dBG.iconbitmap('Logo klub.ico')
+    w_dBG.config(bg='#3e3e3e')
 
+    Delete_Frame = LabelFrame(w_dBG, bg='#3e3e3e')
+    Delete_Frame.pack(padx=10, pady=10, side=TOP)
+    
     global delete_box
-    delete_box = Entry(w_dBG, width=10)
-    delete_box.grid(row=0, column=1, padx=20)
+    delete_box = Entry(Delete_Frame, width=10, bg='#696969', fg='#d3d3d3')
+    delete_box.pack(side=RIGHT, padx=10, pady=10)
 
-    delete_box_label = Label(w_dBG, text='Id planszówki do usunięcia:')
-    delete_box_label.grid(row=0, column=0, padx=20)
+    delete_box_label = Label(Delete_Frame, text='Id planszówki do usunięcia:', bg='#3e3e3e', fg='#d3d3d3')
+    delete_box_label.pack(side=LEFT, padx=10, pady=10)
 
-    delete_button = Button(w_dBG, text='Usuń planszówkę', command=delete)
-    delete_button.grid(row=1, column=0, columnspan=2, pady=10)
+    DB_Frame = Frame(w_dBG, bg='#3e3e3e')
+    DB_Frame.pack(padx=10, pady=0, side=TOP)
+
+    delete_button = Button(DB_Frame, text='Usuń planszówkę', bg='#696969', fg='#d3d3d3', activebackground='#4a4a4a', activeforeground='white', command=delete)
+    delete_button.pack(padx=10, pady=10)
 
 
 # Create Function in Delete Button
