@@ -61,7 +61,7 @@ def submit_board_game():
 
 # Create Function a Save Button
 def save():
-    worksheet = OpenSheet()
+    worksheet = OpenSheet('Gry')
 
     temporaty_list_BG = [int(len(worksheet.get_all_values())), f"{name_board_games.get()}", f'{type_board_games.get()}', int(f'{min_player.get()}'), int(f'{max_player.get()}'), int(f'{time_games.get()}'), f'{owner.get()}']
     worksheet.append_row(temporaty_list_BG)

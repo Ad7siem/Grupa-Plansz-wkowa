@@ -1,6 +1,7 @@
 from tkinter import *
 from tkinter import ttk
-from table import *
+from boardgames import *
+from resultsgame import *
 from submit import submit_board_game
 from edit import edit_board_game
 from delete import delete_board_game
@@ -70,6 +71,9 @@ Buttons_Game_Board.pack(side=TOP, pady=5, ipady=5)
 Buttons_List_Resultat = LabelFrame(Buttons_Label, text='Tabela wyników', bg=color_bg, fg=color_text)
 Buttons_List_Resultat.pack(side=TOP, pady=5, ipady=5)
 
+Button_Search_Items = LabelFrame(Buttons_Label, text='Wyszukiwanie', bg=color_bg, fg=color_text)
+Button_Search_Items.pack(side=TOP, pady=5, ipady=5)
+
 # Create Table Board Games Frame 
 Table_Board_Games_Label = LabelFrame(window_frame, text='Tabela Gier Planszowych', bg=color_bg, fg=color_text)
 Table_Board_Games_Label.grid(row=0, column=1, rowspan=10, padx=10, pady=10)
@@ -113,7 +117,7 @@ delete_btn_board_game.pack(padx=10, pady=2)
 
 # Create a Query Button Results days
 query_btn_list_results_days = Button(
-    Buttons_List_Resultat, text='Pokaż wyniki', width=17, bd=0, bg=color_tables, fg=color_text, relief="solid", activebackground=color_button, activeforeground='white')
+    Buttons_List_Resultat, text='Pokaż wyniki', width=17, bd=0, bg=color_tables, fg=color_text, relief="solid", activebackground=color_button, activeforeground='white', command=query_list_results_game)
 query_btn_list_results_days.pack(padx=10, pady=(10,2))
 
 # Create Submit Button Result day
@@ -125,5 +129,14 @@ submit_btn_result_day.pack(padx=10, pady=2)
 edit_btn_results_day = Button(
     Buttons_List_Resultat, text='Edytuj wynik dnia', width=17, bd=0, bg=color_tables, fg=color_text, relief="solid", activebackground=color_button, activeforeground='white')
 edit_btn_results_day.pack(padx=10, pady=2)
+
+# Create Search Option
+# ============================================================================ Tutaj potrzeba przenieś zmienną search_entry do search_item ============================================================================
+search_entry = Entry(Button_Search_Items, bg='#696969', fg='white')
+search_entry.pack(padx=10, pady=(10,2))
+# =====================================================================================================================================================================================================================
+search_btn = Button(
+    Button_Search_Items, text='Szukaj', width=17, bd=0, bg=color_tables, fg=color_text, relief='solid', activebackground=color_button, activeforeground='white', command=search_item)
+search_btn.pack(padx=10, pady=2)
 
 test.mainloop()

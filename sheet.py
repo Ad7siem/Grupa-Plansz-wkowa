@@ -8,7 +8,7 @@ def open_json():
 
 
 # Create Open Sheet
-def OpenSheet():
+def OpenSheet(name_sheet):
     try:
         gc = gspread.service_account(filename=filename)
         sh = gc.open_by_key('1FT3Jau5n1kYi3nSl1w9W3eVWmGDanUSUhsTy0XEEUjM')
@@ -17,5 +17,5 @@ def OpenSheet():
         gc = gspread.service_account(filename=filename)
         sh = gc.open_by_key('1FT3Jau5n1kYi3nSl1w9W3eVWmGDanUSUhsTy0XEEUjM')
 
-    worksheet = sh.sheet1
+    worksheet = sh.worksheet(name_sheet)
     return worksheet

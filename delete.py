@@ -30,7 +30,7 @@ def delete_board_game():
 # Create Function in Delete Button
 def delete():
 
-    worksheet = OpenSheet()
+    worksheet = OpenSheet('Gry')
 
     position = int(delete_box.get())
     length = len(worksheet.get_all_values())
