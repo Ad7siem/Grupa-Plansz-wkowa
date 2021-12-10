@@ -53,6 +53,12 @@ def query_board_game():
         table_board_games.insert(parent='', index=len(records), values=(f'{record[0]}', f'{record[1]}', f'{record[2]}', f'{record[3]}', f'{record[4]}', f'{record[5]}', f'{record[6]}'))
 
 
+def search_entry(root):
+    global s_entry
+    s_entry = Entry(root, bg='#696969', fg='white')
+    s_entry.pack(padx=10, pady=(10,2))
+
+
 def search_item():
     worksheet = OpenSheet('Gry')
     table_board_games.delete(*table_board_games.get_children())
@@ -62,5 +68,7 @@ def search_item():
     records = worksheet.get_all_values()
     for record in records:
         for rec in record:
-            if rec == 'Magda':
+            if rec.upper() == s_entry.get().upper():
                 table_board_games.insert(parent='', index=END, values=(f'{record[0]}', f'{record[1]}', f'{record[2]}', f'{record[3]}', f'{record[4]}', f'{record[5]}', f'{record[6]}'))
+    
+    # s_entry.
