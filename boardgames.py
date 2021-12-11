@@ -55,7 +55,7 @@ def query_board_game():
 
 def search_entry(root):
     global s_entry
-    s_entry = Entry(root, bg='#696969', fg='white')
+    s_entry = Entry(root)#, bg='#696969', fg='white')
     s_entry.pack(padx=10, pady=(10,2))
 
 

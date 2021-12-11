@@ -170,15 +170,24 @@ def submit_results_from_day():
 
     vlist = ['Wygrana','Przegrana']
 
-    place_results_day = Entry(window_entry, width=12)
+    place_results_day = Entry(window_entry, width=12, justify=CENTER)
     place_results_day.grid(row=0, column=0)
-    name_player_results_day = Entry(window_entry, width=24)
+    name_player_results_day = Entry(window_entry, width=24, justify=CENTER)
     name_player_results_day.grid(row=0, column=1)
-    points_results_day = Entry(window_entry, width=12)
+    points_results_day = Entry(window_entry, width=12, justify=CENTER)
     points_results_day.grid(row=0, column=2)
     result_results_day = ttk.Combobox(window_entry, values = vlist, width=20)
     result_results_day.set('-')
     result_results_day.grid(row=0, column=3)
+
+    info_lost_Frame = Frame(window_with_entering_results, bg='#3e3e3e')
+    info_lost_Frame.pack(side=TOP)
+
+    global var
+    var = IntVar()
+    info_lost_checkbutton = Checkbutton(info_lost_Frame, text='Jeśli jest wiele osób zmywających, zaznacz przy tych osobach', background='#3e3e3e', selectcolor='#3e3e3e', fg='white',activebackground='#3e3e3e',activeforeground='white', variable = var)
+    info_lost_checkbutton.pack(side=LEFT)
+    print(var.get())
 
 
     append_button = Frame(window_with_entering_results, bg='#3e3e3e')
@@ -191,6 +200,9 @@ def submit_results_from_day():
 def append_results():
     id_game = 0
     id_player = 0
+    id_rivalry = 0
+    id_lost = 0
+
     worksheet = OpenSheet('ID_Gry')
 
     records = []
@@ -199,7 +211,24 @@ def append_results():
         for rec in record:
             if rec.upper() == name_board_games_results_day.get().upper():
                 id_game = record[1]
-                print(id_game)
+
+    worksheet = OpenSheet('ID_Gracza')
+
+    records = []
+    records = worksheet.get_all_values()
+    for record in records:
+        for rec in record:
+            if rec.upper() == name_player_results_day.get().upper():
+                id_player = record[2]
+
+    id_rivalry = int(quantity_players_entry.get()) - int(place_results_day.get()) + 1
+
+
+
+    if int(place_results_day.get()) == int(quantity_players_entry.get()):
+        id_lost = -1
+    else:
+        id_lost = 1
 
     worksheet = OpenSheet('Baza')
 
@@ -207,20 +236,22 @@ def append_results():
         int(f'{index_results_day.get()}'), 
         int(f'{id_game}'), 
         f'{name_board_games_results_day.get()}', 
-        int(f'0'), 
+        int(f'{id_player}'), 
         int(f'{place_results_day.get()}'),
         f'{name_player_results_day.get()}',
         int(f'{points_results_day.get()}'),
-        int(f'0'),
-        int(f'0'),
+        int(f'{id_rivalry}'),
+        int(f'{id_lost}'),
         f'{result_results_day.get()}',
         f'{game_data_d.get()}-{game_data_m.get()}-{game_data_y.get()}']
 
-    print(temporary_list_results)
+    print(var.get())
 
     worksheet.append_row(temporary_list_results)
 
+    tk = int(place_results_day.get()) + 1
     place_results_day.delete(0, END)
+    place_results_day.insert(0, str(tk))
     name_player_results_day.delete(0, END)
     points_results_day.delete(0, END)
     result_results_day.delete(0, END)
