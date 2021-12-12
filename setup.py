@@ -3,7 +3,7 @@ import os
 from cx_Freeze import setup, Executable
 
 target = Executable(
-    script='main_v2.py',
+    script='main.py',
     base='Win32GUI'
 )
 

@@ -183,12 +183,6 @@ def submit_results_from_day():
     info_lost_Frame = Frame(window_with_entering_results, bg='#3e3e3e')
     info_lost_Frame.pack(side=TOP)
 
-    global var
-    var = IntVar()
-    info_lost_checkbutton = Checkbutton(info_lost_Frame, text='Jeśli jest wiele osób zmywających, zaznacz przy tych osobach', background='#3e3e3e', selectcolor='#3e3e3e', fg='white',activebackground='#3e3e3e',activeforeground='white', variable = var)
-    info_lost_checkbutton.pack(side=LEFT)
-    print(var.get())
-
 
     append_button = Frame(window_with_entering_results, bg='#3e3e3e')
     append_button.pack(side=TOP)
@@ -196,6 +190,10 @@ def submit_results_from_day():
     a_button = Button(append_button, text='Zapisz', width=20, command=append_results)
     a_button.pack(side=BOTTOM, padx=10, pady=10)
 
+# ================================= Test ==========================================
+    global ck 
+    ck = 0
+# =================================================================================
 
 def append_results():
     id_game = 0
@@ -223,7 +221,7 @@ def append_results():
 
     id_rivalry = int(quantity_players_entry.get()) - int(place_results_day.get()) + 1
 
-
+# =======================================================================================  BUDOWA POPRAWNEJ WARTOŚĆI ZMYWANIA ==========================================================================================
 
     if int(place_results_day.get()) == int(quantity_players_entry.get()):
         id_lost = -1
@@ -231,6 +229,20 @@ def append_results():
         id_lost = 1
 
     worksheet = OpenSheet('Baza')
+
+    # print(worksheet.row_values(len(worksheet.get_all_values())))
+
+    # if index_results_day.get() == worksheet.row_values(len(worksheet.get_all_values()))[0]:
+    #     if place_results_day.get() > worksheet.row_values(len(worksheet.get_all_values()))[4]:
+    #         id_lost = -1
+    #         worksheet.row_values(len(worksheet.get_all_values()))[8] = 1
+    #         print(worksheet.row_values(len(worksheet.get_all_values())))
+    #     else:
+    #         id_lost = 1
+
+    # print(index_results_day.get(), worksheet.row_values(len(worksheet.get_all_values()))[0])
+
+# =====================================================================================================================================================================================================================
 
     temporary_list_results = [
         int(f'{index_results_day.get()}'), 
@@ -245,9 +257,9 @@ def append_results():
         f'{result_results_day.get()}',
         f'{game_data_d.get()}-{game_data_m.get()}-{game_data_y.get()}']
 
-    print(var.get())
-
     worksheet.append_row(temporary_list_results)
+
+    print(worksheet.row_values(len(worksheet.get_all_values())))
 
     tk = int(place_results_day.get()) + 1
     place_results_day.delete(0, END)
