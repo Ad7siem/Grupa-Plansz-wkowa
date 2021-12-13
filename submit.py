@@ -192,7 +192,7 @@ def submit_results_from_day():
 
 # ================================= Test ==========================================
     global ck 
-    ck = 0
+    ck = 1
 # =================================================================================
 
 def append_results():
@@ -207,7 +207,7 @@ def append_results():
     records = worksheet.get_all_values()
     for record in records:
         for rec in record:
-            if rec.upper() == name_board_games_results_day.get().upper():
+            if rec.lower() == name_board_games_results_day.get().lower():
                 id_game = record[1]
 
     worksheet = OpenSheet('ID_Gracza')
@@ -216,32 +216,37 @@ def append_results():
     records = worksheet.get_all_values()
     for record in records:
         for rec in record:
-            if rec.upper() == name_player_results_day.get().upper():
+            if rec.lower() == name_player_results_day.get().lower():
                 id_player = record[2]
 
     id_rivalry = int(quantity_players_entry.get()) - int(place_results_day.get()) + 1
 
 # =======================================================================================  BUDOWA POPRAWNEJ WARTOŚĆI ZMYWANIA ==========================================================================================
 
-    if int(place_results_day.get()) == int(quantity_players_entry.get()):
-        id_lost = -1
-    else:
-        id_lost = 1
+    # if int(place_results_day.get()) == int(quantity_players_entry.get()):
+    #     id_lost = -1
+    # else:
+    #     id_lost = 1
 
     worksheet = OpenSheet('Baza')
+    global ck
 
-    # print(worksheet.row_values(len(worksheet.get_all_values())))
 
-    # if index_results_day.get() == worksheet.row_values(len(worksheet.get_all_values()))[0]:
-    #     if place_results_day.get() > worksheet.row_values(len(worksheet.get_all_values()))[4]:
-    #         id_lost = -1
-    #         worksheet.row_values(len(worksheet.get_all_values()))[8] = 1
-    #         print(worksheet.row_values(len(worksheet.get_all_values())))
-    #     else:
-    #         id_lost = 1
+    if index_results_day.get() == worksheet.row_values(len(worksheet.get_all_values()))[0]:
+        if place_results_day.get() > worksheet.row_values(len(worksheet.get_all_values()))[4]:
+            id_lost = -1
+            for i in range(0, ck):
+                worksheet.update_cell(len(worksheet.get_all_values()) - i, 9, 1)
+        else:
+            id_lost = -1
+            ck += 1
+    else:
+        id_lost = -1
 
-    # print(index_results_day.get(), worksheet.row_values(len(worksheet.get_all_values()))[0])
+    if place_results_day.get() != worksheet.row_values(len(worksheet.get_all_values()))[4]:
+        ck = 1
 
+    # print(ck)
 # =====================================================================================================================================================================================================================
 
     temporary_list_results = [
@@ -258,8 +263,6 @@ def append_results():
         f'{game_data_d.get()}-{game_data_m.get()}-{game_data_y.get()}']
 
     worksheet.append_row(temporary_list_results)
-
-    print(worksheet.row_values(len(worksheet.get_all_values())))
 
     tk = int(place_results_day.get()) + 1
     place_results_day.delete(0, END)

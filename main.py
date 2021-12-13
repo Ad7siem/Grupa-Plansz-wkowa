@@ -21,6 +21,7 @@ test.title('Grupa Planszówkowa')
 test.geometry('1120x910')
 test.config(bg=color_other)
 test.iconbitmap('Logo klub.ico')
+test.resizable(width=0, height=0)
 
 # Add some style
 style = ttk.Style()
