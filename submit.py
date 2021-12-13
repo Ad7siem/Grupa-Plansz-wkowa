@@ -228,6 +228,10 @@ def append_results():
     # else:
     #     id_lost = 1
 
+    ''' 
+    Spróbuj zrobić tak, by przy wybraniu Wygrywa wartość była 1, przy przegrywa wartość była 0, a przy zmywaniu wartość byłą -1
+    '''
+
     worksheet = OpenSheet('Baza')
     global ck
 
@@ -236,7 +240,12 @@ def append_results():
         if place_results_day.get() > worksheet.row_values(len(worksheet.get_all_values()))[4]:
             id_lost = -1
             for i in range(0, ck):
-                worksheet.update_cell(len(worksheet.get_all_values()) - i, 9, 1)
+                print(worksheet.row_values(len(worksheet.get_all_values()))[4])
+                if int(worksheet.row_values(len(worksheet.get_all_values()))[4]) == 1:
+                    worksheet.update_cell(len(worksheet.get_all_values()) - i, 9, 1)
+                else:
+                    worksheet.update_cell(len(worksheet.get_all_values()) - i, 9, 0)
+
         else:
             id_lost = -1
             ck += 1
