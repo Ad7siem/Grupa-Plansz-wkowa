@@ -10,7 +10,7 @@ target = Executable(
 setup(
     name = "GryPlanszowe",
     version = "0.1",
-    description = "Modern GUI for Python applications",
+    description = "Gry Planszowe",
     author = "Adam Golews",
     # options = {'build_exe' : {'include_files' : files}},
     executables = [target]

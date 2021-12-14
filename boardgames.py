@@ -71,4 +71,3 @@ def search_item():
             if rec.upper() == s_entry.get().upper():
                 table_board_games.insert(parent='', index=END, values=(f'{record[0]}', f'{record[1]}', f'{record[2]}', f'{record[3]}', f'{record[4]}', f'{record[5]}', f'{record[6]}'))
     
-    # s_entry.

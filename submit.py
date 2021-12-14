@@ -1,6 +1,8 @@
 from tkinter import *
 from tkinter import ttk
 from sheet import OpenSheet
+from ttkwidgets.autocomplete import AutocompleteCombobox
+
 
 # Create Function to Add Board Game
 def submit_board_game():
@@ -168,7 +170,8 @@ def submit_results_from_day():
     global result_results_day
     global points_results_day
 
-    vlist = ['Wygrana','Przegrana']
+    global vlist
+    vlist = ['Wygrana','Przegrana', 'Zmywanie']
 
     place_results_day = Entry(window_entry, width=12, justify=CENTER)
     place_results_day.grid(row=0, column=0)
@@ -176,9 +179,12 @@ def submit_results_from_day():
     name_player_results_day.grid(row=0, column=1)
     points_results_day = Entry(window_entry, width=12, justify=CENTER)
     points_results_day.grid(row=0, column=2)
-    result_results_day = ttk.Combobox(window_entry, values = vlist, width=20)
-    result_results_day.set('-')
+    # result_results_day = ttk.Combobox(window_entry, values = vlist, width=20)
+    # result_results_day.set('-')
+    result_results_day = AutocompleteCombobox(window_entry, width=20, completevalues=vlist)
     result_results_day.grid(row=0, column=3)
+
+
 
     info_lost_Frame = Frame(window_with_entering_results, bg='#3e3e3e')
     info_lost_Frame.pack(side=TOP)
@@ -233,27 +239,34 @@ def append_results():
     '''
 
     worksheet = OpenSheet('Baza')
-    global ck
+    # global ck
 
 
-    if index_results_day.get() == worksheet.row_values(len(worksheet.get_all_values()))[0]:
-        if place_results_day.get() > worksheet.row_values(len(worksheet.get_all_values()))[4]:
-            id_lost = -1
-            for i in range(0, ck):
-                print(worksheet.row_values(len(worksheet.get_all_values()))[4])
-                if int(worksheet.row_values(len(worksheet.get_all_values()))[4]) == 1:
-                    worksheet.update_cell(len(worksheet.get_all_values()) - i, 9, 1)
-                else:
-                    worksheet.update_cell(len(worksheet.get_all_values()) - i, 9, 0)
+    # if index_results_day.get() == worksheet.row_values(len(worksheet.get_all_values()))[0]:
+    #     if place_results_day.get() > worksheet.row_values(len(worksheet.get_all_values()))[4]:
+    #         id_lost = -1
+    #         for i in range(0, ck):
+    #             print(worksheet.row_values(len(worksheet.get_all_values()))[4])
+    #             if int(worksheet.row_values(len(worksheet.get_all_values()))[4]) == 1:
+    #                 worksheet.update_cell(len(worksheet.get_all_values()) - i, 9, 1)
+    #             else:
+    #                 worksheet.update_cell(len(worksheet.get_all_values()) - i, 9, 0)
 
-        else:
-            id_lost = -1
-            ck += 1
-    else:
+    #     else:
+    #         id_lost = -1
+    #         ck += 1
+    # else:
+    #     id_lost = -1
+
+    # if place_results_day.get() != worksheet.row_values(len(worksheet.get_all_values()))[4]:
+    #     ck = 1
+
+    if result_results_day.get() == 'Wygrana':
+        id_lost = 1
+    elif result_results_day.get() == 'Przegrana':
+        id_lost = 0
+    elif result_results_day.get() == 'Zmywanie':
         id_lost = -1
-
-    if place_results_day.get() != worksheet.row_values(len(worksheet.get_all_values()))[4]:
-        ck = 1
 
     # print(ck)
 # =====================================================================================================================================================================================================================

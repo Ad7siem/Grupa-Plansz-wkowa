@@ -23,7 +23,7 @@ test.config(bg=color_other)
 test.iconbitmap('Logo klub.ico')
 test.resizable(width=0, height=0)
 
-# Add some style
+# # Add some style
 style = ttk.Style()
 style.theme_use('clam')
 style.configure('Treeview', 
