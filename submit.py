@@ -1,6 +1,6 @@
 from tkinter import *
 from tkinter import ttk
-from sheet import OpenSheet
+from sheet import OpenSheet, List_Items
 from ttkwidgets.autocomplete import AutocompleteCombobox
 
 
@@ -86,6 +86,10 @@ def submit_results_from_day():
     w_RFD.iconbitmap('Logo klub.ico')
     w_RFD.config(bg='#3e3e3e')
 
+    # print(List_Items('ID_Gry', 0)) # ====================================
+    list_games = List_Items('ID_Gry', 0)
+    list_players = List_Items('ID_Gracza', 0)
+
     global index_results_day
     global name_board_games_results_day
     global game_data_d
@@ -140,8 +144,11 @@ def submit_results_from_day():
     name_board_games_results_day_label = Label(row_two_first_data, text='Nazwa gry:', bg='#3e3e3e', fg='#d3d3d3')
     name_board_games_results_day_label.pack(side=LEFT, padx=(10,2), pady=10)
 
-    name_board_games_results_day = Entry(row_two_first_data, width=40)
+    name_board_games_results_day = AutocompleteCombobox(row_two_first_data, width=40, completevalues=list_games)
     name_board_games_results_day.pack(side=LEFT, padx=(2,10), pady=10)
+    # name_board_games_results_day = Entry(row_two_first_data, width=40)
+    # name_board_games_results_day.pack(side=LEFT, padx=(2,10), pady=10)
+
 
     # Create Frame with Second Items
     second_data = Frame(window_with_entering_results, bg='#3e3e3e')
@@ -175,7 +182,9 @@ def submit_results_from_day():
 
     place_results_day = Entry(window_entry, width=12, justify=CENTER)
     place_results_day.grid(row=0, column=0)
-    name_player_results_day = Entry(window_entry, width=24, justify=CENTER)
+    # name_player_results_day = Entry(window_entry, width=24, justify=CENTER)
+    # name_player_results_day.grid(row=0, column=1)
+    name_player_results_day = AutocompleteCombobox(window_entry, width=24, justify=CENTER, completevalues=list_players)
     name_player_results_day.grid(row=0, column=1)
     points_results_day = Entry(window_entry, width=12, justify=CENTER)
     points_results_day.grid(row=0, column=2)
@@ -196,10 +205,10 @@ def submit_results_from_day():
     a_button = Button(append_button, text='Zapisz', width=20, command=append_results)
     a_button.pack(side=BOTTOM, padx=10, pady=10)
 
-# ================================= Test ==========================================
+    # ================================= Test ==========================================
     global ck 
     ck = 1
-# =================================================================================
+    # =================================================================================
 
 def append_results():
     id_game = 0
@@ -227,7 +236,7 @@ def append_results():
 
     id_rivalry = int(quantity_players_entry.get()) - int(place_results_day.get()) + 1
 
-# =======================================================================================  BUDOWA POPRAWNEJ WARTOŚĆI ZMYWANIA ==========================================================================================
+    # =======================================================================================  BUDOWA POPRAWNEJ WARTOŚĆI ZMYWANIA ==========================================================================================
 
     # if int(place_results_day.get()) == int(quantity_players_entry.get()):
     #     id_lost = -1
@@ -269,7 +278,7 @@ def append_results():
         id_lost = -1
 
     # print(ck)
-# =====================================================================================================================================================================================================================
+    # =====================================================================================================================================================================================================================
 
     temporary_list_results = [
         int(f'{index_results_day.get()}'), 
