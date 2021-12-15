@@ -1,6 +1,6 @@
 from tkinter import *
 from tkinter import ttk
-from sheet import OpenSheet, List_Items
+from sheet import OpenSheet, List_Items, List_Games, List_Players
 from ttkwidgets.autocomplete import AutocompleteCombobox
 
 
@@ -87,8 +87,8 @@ def submit_results_from_day():
     w_RFD.config(bg='#3e3e3e')
 
     # print(List_Items('ID_Gry', 0)) # ====================================
-    list_games = List_Items('ID_Gry', 0)
-    list_players = List_Items('ID_Gracza', 0)
+    # list_games = List_Items('ID_Gry', 0)
+    # list_players = List_Items('ID_Gracza', 0)
 
     global index_results_day
     global name_board_games_results_day
@@ -144,7 +144,7 @@ def submit_results_from_day():
     name_board_games_results_day_label = Label(row_two_first_data, text='Nazwa gry:', bg='#3e3e3e', fg='#d3d3d3')
     name_board_games_results_day_label.pack(side=LEFT, padx=(10,2), pady=10)
 
-    name_board_games_results_day = AutocompleteCombobox(row_two_first_data, width=40, completevalues=list_games)
+    name_board_games_results_day = AutocompleteCombobox(row_two_first_data, width=40, completevalues=List_Games())
     name_board_games_results_day.pack(side=LEFT, padx=(2,10), pady=10)
     # name_board_games_results_day = Entry(row_two_first_data, width=40)
     # name_board_games_results_day.pack(side=LEFT, padx=(2,10), pady=10)
@@ -184,7 +184,7 @@ def submit_results_from_day():
     place_results_day.grid(row=0, column=0)
     # name_player_results_day = Entry(window_entry, width=24, justify=CENTER)
     # name_player_results_day.grid(row=0, column=1)
-    name_player_results_day = AutocompleteCombobox(window_entry, width=24, justify=CENTER, completevalues=list_players)
+    name_player_results_day = AutocompleteCombobox(window_entry, width=24, justify=CENTER, completevalues=List_Players())
     name_player_results_day.grid(row=0, column=1)
     points_results_day = Entry(window_entry, width=12, justify=CENTER)
     points_results_day.grid(row=0, column=2)
