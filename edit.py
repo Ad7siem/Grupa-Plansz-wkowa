@@ -9,6 +9,7 @@ def edit_board_game():
     w_EBG = Tk()
     w_EBG.title('Aktualizacja')
     w_EBG.geometry('340x350')
+    w_EBG.resizable(width=0, height=0)
     w_EBG.iconbitmap('Logo klub.ico')
     w_EBG.config(bg='#3e3e3e')
 

@@ -7,6 +7,7 @@ def delete_board_game():
     w_dBG = Tk()
     w_dBG.title('Usuwanie planszówki')
     w_dBG.geometry('320x120')
+    w_dBG.resizable(width=0, height=0)
     w_dBG.iconbitmap('Logo klub.ico')
     w_dBG.config(bg='#3e3e3e')
 

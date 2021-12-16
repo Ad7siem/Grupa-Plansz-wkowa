@@ -11,6 +11,7 @@ def submit_board_game():
     w_BG.title('Dodawanie gry planszowej')
     w_BG.iconbitmap('Logo klub.ico')
     w_BG.geometry('320x220')
+    w_BG.resizable(width=0, height=0)
     w_BG.config(bg='#3e3e3e')
 
     # Create Global Variables for next box names
@@ -83,12 +84,13 @@ def submit_results_from_day():
     w_RFD = Tk()
     w_RFD.title('Dodawanie wyników dnia')
     w_RFD.geometry('550x250')
+    w_RFD.resizable(width=0, height=0)
     w_RFD.iconbitmap('Logo klub.ico')
     w_RFD.config(bg='#3e3e3e')
 
     # print(List_Items('ID_Gry', 0)) # ====================================
-    # list_games = List_Items('ID_Gry', 0)
-    # list_players = List_Items('ID_Gracza', 0)
+    list_games = List_Items('ID_Gry', 0)
+    list_players = List_Items('ID_Gracza', 0)
 
     global index_results_day
     global name_board_games_results_day
@@ -144,7 +146,7 @@ def submit_results_from_day():
     name_board_games_results_day_label = Label(row_two_first_data, text='Nazwa gry:', bg='#3e3e3e', fg='#d3d3d3')
     name_board_games_results_day_label.pack(side=LEFT, padx=(10,2), pady=10)
 
-    name_board_games_results_day = AutocompleteCombobox(row_two_first_data, width=40, completevalues=List_Games())
+    name_board_games_results_day = AutocompleteCombobox(row_two_first_data, width=40, completevalues=list_games)
     name_board_games_results_day.pack(side=LEFT, padx=(2,10), pady=10)
     # name_board_games_results_day = Entry(row_two_first_data, width=40)
     # name_board_games_results_day.pack(side=LEFT, padx=(2,10), pady=10)
@@ -184,7 +186,7 @@ def submit_results_from_day():
     place_results_day.grid(row=0, column=0)
     # name_player_results_day = Entry(window_entry, width=24, justify=CENTER)
     # name_player_results_day.grid(row=0, column=1)
-    name_player_results_day = AutocompleteCombobox(window_entry, width=24, justify=CENTER, completevalues=List_Players())
+    name_player_results_day = AutocompleteCombobox(window_entry, width=24, justify=CENTER, completevalues=list_players)
     name_player_results_day.grid(row=0, column=1)
     points_results_day = Entry(window_entry, width=12, justify=CENTER)
     points_results_day.grid(row=0, column=2)
@@ -221,18 +223,24 @@ def append_results():
     records = []
     records = worksheet.get_all_values()
     for record in records:
-        for rec in record:
-            if rec.lower() == name_board_games_results_day.get().lower():
-                id_game = record[1]
+        if record[0].lower() == name_board_games_results_day.get().lower():
+            id_game = record[1]
+
+        # for rec in record:
+        #     if rec.lower() == name_board_games_results_day.get().lower():
+        #         id_game = record[1]
 
     worksheet = OpenSheet('ID_Gracza')
 
     records = []
     records = worksheet.get_all_values()
     for record in records:
-        for rec in record:
-            if rec.lower() == name_player_results_day.get().lower():
-                id_player = record[2]
+        if record[0].lower() == name_player_results_day.get().lower():
+            id_player = record[2]
+
+        # for rec in record:
+        #     if rec.lower() == name_player_results_day.get().lower():
+        #         id_player = record[2]
 
     id_rivalry = int(quantity_players_entry.get()) - int(place_results_day.get()) + 1
 
@@ -271,11 +279,11 @@ def append_results():
     #     ck = 1
 
     if result_results_day.get() == 'Wygrana':
-        id_lost = 1
+        id_lost = -1
     elif result_results_day.get() == 'Przegrana':
         id_lost = 0
     elif result_results_day.get() == 'Zmywanie':
-        id_lost = -1
+        id_lost = 1
 
     # print(ck)
     # =====================================================================================================================================================================================================================
