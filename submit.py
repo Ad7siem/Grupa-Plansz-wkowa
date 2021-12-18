@@ -1,6 +1,6 @@
 from tkinter import *
 from tkinter import ttk
-from sheet import OpenSheet, List_Items, List_Games, List_Players
+from sheet import OpenSheet, List_Items
 from ttkwidgets.autocomplete import AutocompleteCombobox
 
 

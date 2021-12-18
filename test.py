@@ -80,6 +80,12 @@
 
 from ttkwidgets.autocomplete import AutocompleteCombobox
 from tkinter import *
+from configparser import ConfigParser
+
+# Read our config file and get colors
+parser = ConfigParser()
+parser.read('test.ini')
+saved_window_background = parser.get('colors', 'window_background')
 
 countries = [
         'Antigua and Barbuda', 'Bahamas','Barbados','Belize', 'Canada',
@@ -92,14 +98,14 @@ countries = [
 ws = Tk()
 ws.title('PythonGuides')
 ws.geometry('400x300')
-ws.config(bg='#8DBF5A')
+ws.config(bg=saved_window_background)
 
-frame = Frame(ws, bg='#8DBF5A')
+frame = Frame(ws, bg=saved_window_background)
 frame.pack(expand=True)
 
 Label(
     frame, 
-    bg='#8DBF5A',
+    bg=saved_window_background,
     font = ('Times',21),
     text='Countries in North America '
     ).pack()
