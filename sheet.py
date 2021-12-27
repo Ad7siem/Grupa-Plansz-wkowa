@@ -21,17 +21,18 @@ def OpenSheet(name_sheet):
     parser = ConfigParser()
     parser.read('main.ini')
     json = parser.get('owner', 'json')
+    file_sheets = parser.get('sheet', 'sheets_file')
 
     # Read our json with sheet
     try:
         gc = gspread.service_account(filename=json)
-        sh = gc.open_by_key('1FT3Jau5n1kYi3nSl1w9W3eVWmGDanUSUhsTy0XEEUjM')
+        sh = gc.open_by_url(file_sheets)
     except:
         open_json()
         parser.read('main.ini')
         json = parser.get('owner', 'json')
         gc = gspread.service_account(filename=json)
-        sh = gc.open_by_key('1FT3Jau5n1kYi3nSl1w9W3eVWmGDanUSUhsTy0XEEUjM')
+        sh = gc.open_by_url(file_sheets)
 
     worksheet = sh.worksheet(name_sheet)
     return worksheet

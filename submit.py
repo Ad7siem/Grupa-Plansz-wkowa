@@ -89,7 +89,11 @@ def submit_results_from_day():
     w_RFD.config(bg='#3e3e3e')
 
     # print(List_Items('ID_Gry', 0)) # ====================================
+
+    # Create a list for name boardgames
     list_games = List_Items('ID_Gry', 0)
+
+    # Create a list for name player
     list_players = List_Items('ID_Gracza', 0)
 
     global index_results_day
@@ -148,9 +152,6 @@ def submit_results_from_day():
 
     name_board_games_results_day = AutocompleteCombobox(row_two_first_data, width=40, completevalues=list_games)
     name_board_games_results_day.pack(side=LEFT, padx=(2,10), pady=10)
-    # name_board_games_results_day = Entry(row_two_first_data, width=40)
-    # name_board_games_results_day.pack(side=LEFT, padx=(2,10), pady=10)
-
 
     # Create Frame with Second Items
     second_data = Frame(window_with_entering_results, bg='#3e3e3e')
@@ -179,38 +180,32 @@ def submit_results_from_day():
     global result_results_day
     global points_results_day
 
+    # Create a list for results of day
     global vlist
     vlist = ['Wygrana','Przegrana', 'Zmywanie']
 
+    # Create Entry with Label Second Items
     place_results_day = Entry(window_entry, width=12, justify=CENTER)
     place_results_day.grid(row=0, column=0)
-    # name_player_results_day = Entry(window_entry, width=24, justify=CENTER)
-    # name_player_results_day.grid(row=0, column=1)
+
     name_player_results_day = AutocompleteCombobox(window_entry, width=24, justify=CENTER, completevalues=list_players)
     name_player_results_day.grid(row=0, column=1)
     points_results_day = Entry(window_entry, width=12, justify=CENTER)
     points_results_day.grid(row=0, column=2)
-    # result_results_day = ttk.Combobox(window_entry, values = vlist, width=20)
-    # result_results_day.set('-')
+
     result_results_day = AutocompleteCombobox(window_entry, width=20, completevalues=vlist)
     result_results_day.grid(row=0, column=3)
-
-
 
     info_lost_Frame = Frame(window_with_entering_results, bg='#3e3e3e')
     info_lost_Frame.pack(side=TOP)
 
-
     append_button = Frame(window_with_entering_results, bg='#3e3e3e')
     append_button.pack(side=TOP)
 
+    # Create Button Save Results Day
     a_button = Button(append_button, text='Zapisz', width=20, command=append_results)
     a_button.pack(side=BOTTOM, padx=10, pady=10)
 
-    # ================================= Test ==========================================
-    global ck 
-    ck = 1
-    # =================================================================================
 
 def append_results():
     id_game = 0
@@ -218,65 +213,41 @@ def append_results():
     id_rivalry = 0
     id_lost = 0
 
+    # Create search a game id
     worksheet = OpenSheet('ID_Gry')
 
-    records = []
-    records = worksheet.get_all_values()
-    for record in records:
-        if record[0].lower() == name_board_games_results_day.get().lower():
-            id_game = record[1]
+    cell = worksheet.find(name_board_games_results_day.get())
+    row = worksheet.row_values(cell.row)
+    id_game = row[1]
 
-        # for rec in record:
-        #     if rec.lower() == name_board_games_results_day.get().lower():
-        #         id_game = record[1]
+    # records = []
+    # records = worksheet.get_all_values()
+    # for record in records:
+    #     if record[0].lower() == name_board_games_results_day.get().lower():
+    #         id_game = record[1]
+    #         break
 
+
+    # Create search a player id
     worksheet = OpenSheet('ID_Gracza')
 
-    records = []
-    records = worksheet.get_all_values()
-    for record in records:
-        if record[0].lower() == name_player_results_day.get().lower():
-            id_player = record[2]
+    cell = worksheet.find(name_player_results_day.get())
+    row = worksheet.row_values(cell.row)
+    id_player = row[2]
 
-        # for rec in record:
-        #     if rec.lower() == name_player_results_day.get().lower():
-        #         id_player = record[2]
+    # records = []
+    # records = worksheet.get_all_values()
+    # for record in records:
+    #     if record[0].lower() == name_player_results_day.get().lower():
+    #         id_player = record[2]
+    #         break
 
+    # Create values points
     id_rivalry = int(quantity_players_entry.get()) - int(place_results_day.get()) + 1
 
-    # =======================================================================================  BUDOWA POPRAWNEJ WARTOŚĆI ZMYWANIA ==========================================================================================
-
-    # if int(place_results_day.get()) == int(quantity_players_entry.get()):
-    #     id_lost = -1
-    # else:
-    #     id_lost = 1
-
-    ''' 
-    Spróbuj zrobić tak, by przy wybraniu Wygrywa wartość była 1, przy przegrywa wartość była 0, a przy zmywaniu wartość byłą -1
-    '''
-
+    # Create values lost
     worksheet = OpenSheet('Baza')
-    # global ck
 
-
-    # if index_results_day.get() == worksheet.row_values(len(worksheet.get_all_values()))[0]:
-    #     if place_results_day.get() > worksheet.row_values(len(worksheet.get_all_values()))[4]:
-    #         id_lost = -1
-    #         for i in range(0, ck):
-    #             print(worksheet.row_values(len(worksheet.get_all_values()))[4])
-    #             if int(worksheet.row_values(len(worksheet.get_all_values()))[4]) == 1:
-    #                 worksheet.update_cell(len(worksheet.get_all_values()) - i, 9, 1)
-    #             else:
-    #                 worksheet.update_cell(len(worksheet.get_all_values()) - i, 9, 0)
-
-    #     else:
-    #         id_lost = -1
-    #         ck += 1
-    # else:
-    #     id_lost = -1
-
-    # if place_results_day.get() != worksheet.row_values(len(worksheet.get_all_values()))[4]:
-    #     ck = 1
 
     if result_results_day.get() == 'Wygrana':
         id_lost = -1
@@ -285,9 +256,7 @@ def append_results():
     elif result_results_day.get() == 'Zmywanie':
         id_lost = 1
 
-    # print(ck)
-    # =====================================================================================================================================================================================================================
-
+    # Create a record of values in a worksheet
     temporary_list_results = [
         int(f'{index_results_day.get()}'), 
         int(f'{id_game}'), 
