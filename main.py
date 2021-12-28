@@ -62,7 +62,6 @@ style.map('Treeview.Heading',
 style.map("Vertical.TScrollbar",
     background=[('selected', '#a0a000')])
 
-
 # Create Main Window
 window_frame = Frame(test, bg=window_background)
 window_frame.pack(padx=10, pady=17)
@@ -157,5 +156,6 @@ add_json.pack(padx=10, pady=(10,2))
 # photo = PhotoImage('./info.png')
 # info_app = Button(Button_Info_App, text='Informacje', width=17, relief='solid', command=info)
 # info_app.pack(padx=10, pady=2)
+
 
 test.mainloop()

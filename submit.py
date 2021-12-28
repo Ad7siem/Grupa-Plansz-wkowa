@@ -91,10 +91,10 @@ def submit_results_from_day():
     # print(List_Items('ID_Gry', 0)) # ====================================
 
     # Create a list for name boardgames
-    list_games = List_Items('ID_Gry', 0)
+    list_games = List_Items('ID_Gry', 1)
 
     # Create a list for name player
-    list_players = List_Items('ID_Gracza', 0)
+    list_players = List_Items('ID_Gracza', 1)
 
     global index_results_day
     global name_board_games_results_day

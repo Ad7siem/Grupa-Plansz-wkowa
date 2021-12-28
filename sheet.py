@@ -2,13 +2,19 @@ import gspread
 from tkinter import filedialog
 from configparser import ConfigParser
 
+def open_ini(name='main.ini'):
+    # Read our config file
+    parser = ConfigParser()
+    parser.read(name)
+
+    return parser
+
 # Create open file json
 def open_json():
     filename = filedialog.askopenfilename(initialdir = "/", title="Wybierz plik json", filetypes=(("Json", "*.json"), ("all files", "*.*")))
 
     # Config file
-    parser = ConfigParser()
-    parser.read('main.ini')
+    parser = open_ini()
     parser.set('owner', 'json', filename)
     
     # Save the config file
@@ -18,8 +24,7 @@ def open_json():
 # Create Open Sheet
 def OpenSheet(name_sheet):
     # Read our config file
-    parser = ConfigParser()
-    parser.read('main.ini')
+    parser = open_ini()
     json = parser.get('owner', 'json')
     file_sheets = parser.get('sheet', 'sheets_file')
 
@@ -43,12 +48,14 @@ def List_Items(name_sheet, column):
     list_items = []
 
     worksheet = OpenSheet(name_sheet)
-    records = worksheet.get_all_values()
+    list_items = worksheet.col_values(column)
+    # records = worksheet.get_all_values()
     
-    for record in records:
-        list_items.append(record[column])
+    # for record in records:
+    #     list_items.append(record[column])
 
     return list_items
+
 
 
 # def List_Players():

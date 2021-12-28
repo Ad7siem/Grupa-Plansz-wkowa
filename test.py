@@ -78,6 +78,7 @@
 
 # w.mainloop()
 
+'''
 from ttkwidgets.autocomplete import AutocompleteCombobox
 from tkinter import *
 from configparser import ConfigParser
@@ -119,3 +120,23 @@ entry = AutocompleteCombobox(
 entry.pack()
 
 ws.mainloop()  
+'''
+from tkinter import *
+
+w_INFO = Tk()
+w_INFO.title('Informacje')
+w_INFO.geometry('300x180')
+w_INFO.iconbitmap('Logo klub.ico')
+
+bg = PhotoImage(file="Images/info.png")
+bg1 = PhotoImage(file="Images/tlo.png")
+# bg2 = PhotoImage(file="Images/tlo.jpg")
+info = PhotoImage(file='Images/informacje.png')
+
+my_label = Label(w_INFO, image=bg1)
+my_label.place(x=0, y=0, relwidth=1, relheight=1)
+
+my_button = Button(w_INFO, image=info)
+my_button.pack()
+
+w_INFO.mainloop()
