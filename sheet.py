@@ -2,8 +2,8 @@ import gspread
 from tkinter import filedialog
 from configparser import ConfigParser
 
+# Read our config file
 def open_ini(name='main.ini'):
-    # Read our config file
     parser = ConfigParser()
     parser.read(name)
 

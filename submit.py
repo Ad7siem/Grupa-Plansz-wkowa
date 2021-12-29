@@ -9,6 +9,10 @@ parser = open_ini()
 sheet_player = parser.get('sheet', 'sheet_player')
 sheet_boardgame = parser.get('sheet', 'sheet_boardgame')
 sheet_results = parser.get('sheet', 'sheet_results')
+window_background = parser.get('colors', 'window_background')
+button_background = parser.get('colors', 'button_background')
+button_activebackground = parser.get('colors', 'button_activebackground')
+text = parser.get('colors', 'text')
 
 # Create Function to Add Board Game
 def submit_board_game():
@@ -18,7 +22,7 @@ def submit_board_game():
     w_BG.iconbitmap('Logo klub.ico')
     w_BG.geometry('320x220')
     w_BG.resizable(width=0, height=0)
-    w_BG.config(bg='#3e3e3e')
+    w_BG.config(bg=window_background)
 
     # Create Global Variables for next box names
     global name_board_games
@@ -30,43 +34,43 @@ def submit_board_game():
     global max_player
     global time_games
 
-    Submit_Frame = LabelFrame(w_BG, text='', bg='#3e3e3e')
+    Submit_Frame = LabelFrame(w_BG, text='', bg=window_background)
     Submit_Frame.pack(side=TOP, padx=10, pady=10, ipady=5)
 
     # Create Text Boxes
-    name_board_games = Entry(Submit_Frame, width=30, bg='#696969', fg='#d3d3d3')
+    name_board_games = Entry(Submit_Frame, width=30, bg=button_background, fg=text)
     name_board_games.grid(row=0, column=1, padx=10, pady=(10,0))
-    type_board_games = Entry(Submit_Frame, width=30, bg='#696969', fg='#d3d3d3')
+    type_board_games = Entry(Submit_Frame, width=30, bg=button_background, fg=text)
     type_board_games.grid(row=1, column=1)
-    min_player = Entry(Submit_Frame, width=30, bg='#696969', fg='#d3d3d3')
+    min_player = Entry(Submit_Frame, width=30, bg=button_background, fg=text)
     min_player.grid(row=2, column=1)
-    max_player = Entry(Submit_Frame, width=30, bg='#696969', fg='#d3d3d3')
+    max_player = Entry(Submit_Frame, width=30, bg=button_background, fg=text)
     max_player.grid(row=3, column=1)
-    time_games = Entry(Submit_Frame, width=30, bg='#696969', fg='#d3d3d3')
+    time_games = Entry(Submit_Frame, width=30, bg=button_background, fg=text)
     time_games.grid(row=4, column=1)
-    owner = Entry(Submit_Frame, width=30, bg='#696969', fg='#d3d3d3')
+    owner = Entry(Submit_Frame, width=30, bg=button_background, fg=text)
     owner.grid(row=5, column=1)
 
 
     # Create Text Box Labels
-    name_board_games_label = Label(Submit_Frame, text='Nazwa Gry:', padx=(10), bg='#3e3e3e', fg='#d3d3d3')
+    name_board_games_label = Label(Submit_Frame, text='Nazwa Gry:', padx=(10), bg=window_background, fg=text)
     name_board_games_label.grid(row=0, column=0, pady=(5,0))
-    type_board_games_label = Label(Submit_Frame, text='Typ:', bg='#3e3e3e', fg='#d3d3d3')
+    type_board_games_label = Label(Submit_Frame, text='Typ:', bg=window_background, fg=text)
     type_board_games_label.grid(row=1, column=0)
-    min_player_label = Label(Submit_Frame, text='Min. graczy', bg='#3e3e3e', fg='#d3d3d3')
+    min_player_label = Label(Submit_Frame, text='Min. graczy', bg=window_background, fg=text)
     min_player_label.grid(row=2, column=0)
-    max_player_label = Label(Submit_Frame, text='Max. graczy', bg='#3e3e3e', fg='#d3d3d3')
+    max_player_label = Label(Submit_Frame, text='Max. graczy', bg=window_background, fg=text)
     max_player_label.grid(row=3, column=0)
-    time_games_label = Label(Submit_Frame, text='Czas gry', bg='#3e3e3e', fg='#d3d3d3')
+    time_games_label = Label(Submit_Frame, text='Czas gry', bg=window_background, fg=text)
     time_games_label.grid(row=4, column=0)
-    owner_label = Label(Submit_Frame, text='Właściciel:', bg='#3e3e3e', fg='#d3d3d3')
+    owner_label = Label(Submit_Frame, text='Właściciel:', bg=window_background, fg=text)
     owner_label.grid(row=5, column=0)
 
     SB_Frame = Frame(w_BG)
     SB_Frame.pack(side=TOP, padx=10, pady=10)
 
     # Create a Save Button To Save new record
-    save_btn = Button(SB_Frame, text='Zapisz', width=20, bg='#696969', fg='#d3d3d3', activebackground='#4a4a4a', activeforeground='white', command=save)
+    save_btn = Button(SB_Frame, text='Zapisz', width=20, bg=button_background, fg=text, activebackground=button_activebackground, activeforeground=text, command=save)
     save_btn.pack()
 
 # Create Function a Save Button
@@ -92,9 +96,7 @@ def submit_results_from_day():
     w_RFD.geometry('550x250')
     w_RFD.resizable(width=0, height=0)
     w_RFD.iconbitmap('Logo klub.ico')
-    w_RFD.config(bg='#3e3e3e')
-
-    # print(List_Items('ID_Gry', 0)) # ====================================
+    w_RFD.config(bg=window_background)
 
     # Create a list for name boardgames
     list_games = List_Items(sheet_boardgame, 1)
@@ -110,20 +112,20 @@ def submit_results_from_day():
 
     # Create Result LabelFrame
     global window_with_entering_results
-    window_with_entering_results = LabelFrame(w_RFD, text='Dodaj resultat dnia', bg='#3e3e3e', fg='#d3d3d3')
+    window_with_entering_results = LabelFrame(w_RFD, text='Dodaj resultat dnia', bg=window_background, fg=text)
     window_with_entering_results.pack(padx=10, pady=10, ipady=5)
 
     # Create Frame First Items
-    first_data = Frame(window_with_entering_results, bg='#3e3e3e')
+    first_data = Frame(window_with_entering_results, bg=window_background)
     first_data.pack(side=TOP)
 
-    row_one_first_data = Frame(first_data, bg='#3e3e3e')
+    row_one_first_data = Frame(first_data, bg=window_background)
     row_one_first_data.pack(side=TOP)
-    row_two_first_data = Frame(first_data, bg='#3e3e3e')
+    row_two_first_data = Frame(first_data, bg=window_background)
     row_two_first_data.pack(side=TOP)
 
     # Create Quantity Players
-    quantity_players_label = Label(row_one_first_data, text='Podaj ilość graczy w grze:', bg='#3e3e3e', fg='#d3d3d3')
+    quantity_players_label = Label(row_one_first_data, text='Podaj ilość graczy w grze:', bg=window_background, fg=text)
     quantity_players_label.pack(side=LEFT, padx=(10,2), pady=10)
 
     global quantity_players_entry
@@ -131,54 +133,54 @@ def submit_results_from_day():
     quantity_players_entry.pack(side=LEFT, padx=(2,10), pady=10)
 
     # Create Game Data
-    game_data_label = Label(row_one_first_data, text='Podaj date rozgrywki (d/m/r):', bg='#3e3e3e', fg='#d3d3d3')
+    game_data_label = Label(row_one_first_data, text='Podaj date rozgrywki (d/m/r):', bg=window_background, fg=text)
     game_data_label.pack(side=LEFT, padx=10, pady=10)
 
     game_data_d = Entry(row_one_first_data, width=3)
     game_data_d.pack(side=LEFT, padx=(5,0), pady=10)
-    first_other_text = Label(row_one_first_data, text='-', bg='#3e3e3e', fg='#d3d3d3')
+    first_other_text = Label(row_one_first_data, text='-', bg=window_background, fg=text)
     first_other_text.pack(side=LEFT, pady=10)
     game_data_m = Entry(row_one_first_data, width=3)
     game_data_m.pack(side=LEFT, padx=0, pady=10)
-    second_other_text = Label(row_one_first_data, text='-', bg='#3e3e3e', fg='#d3d3d3')
+    second_other_text = Label(row_one_first_data, text='-', bg=window_background, fg=text)
     second_other_text.pack(side=LEFT, pady=10)
     game_data_y = Entry(row_one_first_data, width=5)
     game_data_y.pack(side=LEFT, padx=(0,10), pady=10)
 
     # Create Index Game Result in Day
-    index_results_day_label = Label(row_two_first_data, text='Liczba Porządkowa:', bg='#3e3e3e', fg='#d3d3d3')
+    index_results_day_label = Label(row_two_first_data, text='Liczba Porządkowa:', bg=window_background, fg=text)
     index_results_day_label.pack(side=LEFT, padx=(10,2), pady=10)
 
     index_results_day = Entry(row_two_first_data, width=4)
     index_results_day.pack(side=LEFT, padx=(2,10), pady=10)
 
     # Create Name Game Bord
-    name_board_games_results_day_label = Label(row_two_first_data, text='Nazwa gry:', bg='#3e3e3e', fg='#d3d3d3')
+    name_board_games_results_day_label = Label(row_two_first_data, text='Nazwa gry:', bg=window_background, fg=text)
     name_board_games_results_day_label.pack(side=LEFT, padx=(10,2), pady=10)
 
     name_board_games_results_day = AutocompleteCombobox(row_two_first_data, width=40, completevalues=list_games)
     name_board_games_results_day.pack(side=LEFT, padx=(2,10), pady=10)
 
     # Create Frame with Second Items
-    second_data = Frame(window_with_entering_results, bg='#3e3e3e')
+    second_data = Frame(window_with_entering_results, bg=window_background)
     second_data.pack(side=TOP)
 
     # Create Frame with Label Second Items
-    window_label = Frame(second_data, bg='#3e3e3e')
+    window_label = Frame(second_data, bg=window_background)
     window_label.pack(side=TOP, padx=10, pady=(10,0))
 
-    place_results_day_label = Label(window_label, text='Miejsce', bg='#4a4a4a', fg='#d3d3d3', width=10)
+    place_results_day_label = Label(window_label, text='Miejsce', bg=button_activebackground, fg=text, width=10)
     place_results_day_label.grid(row=0, column=0)
-    name_player_results_day_label = Label(window_label, text='Nazwa Gracza', bg='#4a4a4a', fg='#d3d3d3', width=20)
+    name_player_results_day_label = Label(window_label, text='Nazwa Gracza', bg=button_activebackground, fg=text, width=20)
     name_player_results_day_label.grid(row=0, column=1)
-    points_results_day_label = Label(window_label, text='Punktacja', bg='#4a4a4a', fg='#d3d3d3', width=10)
+    points_results_day_label = Label(window_label, text='Punktacja', bg=button_activebackground, fg=text, width=10)
     points_results_day_label.grid(row=0, column=2)
-    result_results_day_label = Label(window_label, text='Rezultat', bg='#4a4a4a', fg='#d3d3d3', width=20)
+    result_results_day_label = Label(window_label, text='Rezultat', bg=button_activebackground, fg=text, width=20)
     result_results_day_label.grid(row=0, column=3)
 
     # Create Frame for a Table Second Items
     global window_entry
-    window_entry = Frame(second_data, bg='#3e3e3e')
+    window_entry = Frame(second_data, bg=window_background)
     window_entry.pack(side=TOP, padx=0, pady=(0, 10))
 
     global place_results_day
@@ -202,14 +204,14 @@ def submit_results_from_day():
     result_results_day = AutocompleteCombobox(window_entry, width=20, completevalues=vlist)
     result_results_day.grid(row=0, column=3)
 
-    info_lost_Frame = Frame(window_with_entering_results, bg='#3e3e3e')
+    info_lost_Frame = Frame(window_with_entering_results, bg=window_background)
     info_lost_Frame.pack(side=TOP)
 
-    append_button = Frame(window_with_entering_results, bg='#3e3e3e')
+    append_button = Frame(window_with_entering_results, bg=window_background)
     append_button.pack(side=TOP)
 
     # Create Button Save Results Day
-    a_button = Button(append_button, text='Zapisz', width=20, command=append_results)
+    a_button = Button(append_button, text='Zapisz',bd=0, bg=button_background, width=20, command=append_results)
     a_button.pack(side=BOTTOM, padx=10, pady=10)
 
 

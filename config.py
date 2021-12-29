@@ -1,8 +1,6 @@
 from tkinter import *
 from tkinter import ttk
-from configparser import ConfigParser
 from sheet import open_json, open_ini
-from PIL import ImageTk, Image
 
 # Read our config file and get colors, sheet
 parser = open_ini()
@@ -31,7 +29,7 @@ def config_app():
     w_CA.geometry('600x370')
     w_CA.resizable(width=0, height=0)
     w_CA.iconbitmap('Logo klub.ico')
-    w_CA.config(bg='#3e3e3e')
+    w_CA.config(bg=window_background)
 
     # Create Frame or LabelFrame in window
     w = LabelFrame(w_CA, text='Ustawienia', bg=window_background, fg=text)   
@@ -133,10 +131,6 @@ def config_app():
     
     Info_Button = Button(w_button, text='Informacje o aplikacji', bd=0, bg=window_background, fg=text, relief="solid", activebackground=window_background, activeforeground=text, command=info)
     Info_Button.grid(row=2, column=0, pady=(20, 0))
-    # global test
-    # test = Button(w_button, text='test', state = DISABLED)
-    # test.grid(row=2, column=1, pady=(20,0))
-
 
 
 def save_config():
@@ -191,7 +185,7 @@ def info():
     w_INFO.title('Informacje')
     w_INFO.geometry('300x180')
     w_INFO.iconbitmap('Logo klub.ico')
-    w_INFO.config(bg='#3e3e3e')
+    w_INFO.config(bg=window_background)
 
     
 

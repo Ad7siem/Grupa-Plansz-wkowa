@@ -1,17 +1,16 @@
 from tkinter import *
 from tkinter import ttk
-from configparser import ConfigParser
 from boardgames import *
 from resultsgame import *
 from submit import submit_board_game, submit_results_from_day
 from edit import edit_board_game
 from delete import delete_board_game
 from config import config_app
+from sheet import open_ini
 # from query import *
 
 # Read our config file and get colors
-parser = ConfigParser()
-parser.read('main.ini')
+parser = open_ini()
 window_border = parser.get('colors', 'window_border')
 window_background = parser.get('colors', 'window_background')
 text = parser.get('colors', 'text')
@@ -109,47 +108,128 @@ Table_Games_Lost(Table_Games_Lost_Label, height=18)
 
 # Create a Query Button Boards Games
 querry_btn_board_games = Button(
-    Buttons_Game_Board, text='Pokaż listę gier', width=17, bd=0, bg=button_background, fg=text, relief="solid", activebackground=button_activebackground, activeforeground='white' , command=query_board_game)
+        Buttons_Game_Board, 
+        text='Pokaż listę gier', 
+        width=17, 
+        bd=0, 
+        bg=button_background, 
+        fg=text, 
+        relief="solid", 
+        activebackground=button_activebackground, 
+        activeforeground=text, 
+        command=query_board_game)
 querry_btn_board_games.pack(padx=10, pady=(10,2))
 
 # Create Submit Button Board Games
 submit_btn_board_games = Button(
-    Buttons_Game_Board, text='Dodaj planszówkę', width=17, bd=0, bg=button_background, fg=text, relief="solid", activebackground=button_activebackground, activeforeground='white', command=submit_board_game)
+        Buttons_Game_Board, 
+        text='Dodaj planszówkę', 
+        width=17, 
+        bd=0, 
+        bg=button_background, 
+        fg=text, 
+        relief="solid", 
+        activebackground=button_activebackground, 
+        activeforeground=text, 
+        command=submit_board_game)
 submit_btn_board_games.pack(padx=10, pady=2)
 
 # Create an Update Button Board Game
 edit_btn_board_game = Button(
-    Buttons_Game_Board, text='Edytuj planszówkę', width=17, bd=0, bg=button_background, fg=text, relief="solid", activebackground=button_activebackground, activeforeground='white', command=edit_board_game)
+        Buttons_Game_Board, 
+        text='Edytuj planszówkę', 
+        width=17, 
+        bd=0, 
+        bg=button_background, 
+        fg=text, 
+        relief="solid", 
+        activebackground=button_activebackground, 
+        activeforeground=text, 
+        command=edit_board_game)
 edit_btn_board_game.pack(padx=10, pady=2)
 
 # Create A Delete Button
 delete_btn_board_game = Button(
-    Buttons_Game_Board, text='Usuń planszówkę', width=17, bd=0, bg=button_background, fg=text, relief="solid", activebackground=button_activebackground, activeforeground='white', command=delete_board_game)
+        Buttons_Game_Board, 
+        text='Usuń planszówkę', 
+        width=17, 
+        bd=0, 
+        bg=button_background, 
+        fg=text, 
+        relief="solid", 
+        activebackground=button_activebackground, 
+        activeforeground=text, 
+        command=delete_board_game)
 delete_btn_board_game.pack(padx=10, pady=2)
 
 # Create a Query Button Results days
 query_btn_list_results_days = Button(
-    Buttons_List_Resultat, text='Pokaż wyniki', width=17, bd=0, bg=button_background, fg=text, relief="solid", activebackground=button_activebackground, activeforeground='white', command=query_list_results_game)
+        Buttons_List_Resultat, 
+        text='Pokaż wyniki', 
+        width=17, 
+        bd=0, 
+        bg=button_background, 
+        fg=text, 
+        relief="solid", 
+        activebackground=button_activebackground, 
+        activeforeground=text, 
+        command=query_list_results_game)
 query_btn_list_results_days.pack(padx=10, pady=(10,2))
 
 # Create Submit Button Result day
 submit_btn_result_day = Button(
-    Buttons_List_Resultat, text='Dodaj wyniki z dnia', width=17, bd=0, bg=button_background, fg=text, relief="solid", activebackground=button_activebackground, activeforeground='white', command=submit_results_from_day)
+        Buttons_List_Resultat, 
+        text='Dodaj wyniki z dnia', 
+        width=17, 
+        bd=0, 
+        bg=button_background, 
+        fg=text, 
+        relief="solid", 
+        activebackground=button_activebackground, 
+        activeforeground=text, 
+        command=submit_results_from_day)
 submit_btn_result_day.pack(padx=10, pady=2)
 
 # Create an Update Button Results Day
 edit_btn_results_day = Button(
-    Buttons_List_Resultat, text='Pokaż wyniki z dnia', width=17, bd=0, bg=button_background, fg=text, relief="solid", activebackground=button_activebackground, activeforeground='white')
+        Buttons_List_Resultat, 
+        text='Pokaż wyniki z dnia', 
+        width=17, 
+        bd=0, 
+        bg=button_background, 
+        fg=text, 
+        relief="solid", 
+        activebackground=button_activebackground, 
+        activeforeground=text)
 edit_btn_results_day.pack(padx=10, pady=2)
 
 # Create Search Option
 search_entry(Button_Search_Items)
 search_btn = Button(
-    Button_Search_Items, text='Szukaj', width=17, bd=0, bg=button_background, fg=text, relief='solid', activebackground=button_activebackground, activeforeground='white', command=search_item)
+        Button_Search_Items, 
+        text='Szukaj', 
+        width=17, 
+        bd=0, 
+        bg=button_background, 
+        fg=text, 
+        relief='solid', 
+        activebackground=button_activebackground, 
+        activeforeground=text, 
+        command=search_item)
 search_btn.pack(padx=10, pady=2)
 
 # Create Config
-add_json = Button(Button_Add_File, text='Ustawienia', width=17, bd=0, bg=button_background, fg=text, relief='solid', command=config_app)
+add_json = Button(
+        Button_Add_File, 
+        text='Ustawienia', 
+        width=17, 
+        bd=0, 
+        bg=button_background, 
+        fg=text, 
+        relief='solid', 
+        activebackground=button_activebackground, 
+        activeforeground=text, 
+        command=config_app)
 add_json.pack(padx=10, pady=(10,2))
 
 # Create Window Info App

@@ -1,17 +1,17 @@
 from tkinter import *
 from tkinter import ttk
-from configparser import ConfigParser
 from sheet import OpenSheet, open_ini
 
-# Read our config file and get sheet
+# Read our config file and get sheet, color
 parser = open_ini()
 sheet_all_boardgame = parser.get('sheet', 'sheet_all_boardgame')
+window_background = parser.get('colors', 'window_background')
 
 
 def Table_Board_Game(root, height=10): #, row=0, column=0, rowspan=1, columnspan=1, padx=10, pady=10, ipadx=0, ipady=0):   
     global table_board_games
 
-    table_frame = Frame(root, bg='#3e3e3e')
+    table_frame = Frame(root, bg=window_background)
     table_frame.pack()
 
     table_board_games = ttk.Treeview(table_frame, height=height)

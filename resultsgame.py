@@ -1,8 +1,13 @@
 from tkinter import *
 from tkinter import ttk
-from sheet import OpenSheet
+from sheet import OpenSheet, open_ini
+
+# Read our config file and get sheet
+parser = open_ini()
+sheet_all_results = parser.get('sheet', 'sheet_all_results')
 
 
+# Create Table Game 
 def Table_Games_Win(root, height=10): #, row=0, column=2, rowspan=1, columnspan=1, padx=10, pady=10, ipadx=0, ipady=0):
     global table_games_win
 
@@ -22,6 +27,7 @@ def Table_Games_Win(root, height=10): #, row=0, column=2, rowspan=1, columnspan=
     table_games_win.pack(padx=10, pady=(5,10))
 
 
+# Create Table Lost
 def Table_Games_Lost(root, height=10): #, row=0, column=0, rowspan=1, columnspan=1, padx=10, pady=10, ipadx=0, ipady=0):
     global table_games_lost
 
@@ -41,8 +47,9 @@ def Table_Games_Lost(root, height=10): #, row=0, column=0, rowspan=1, columnspan
     table_games_lost.pack(padx=10, pady=(5,10))
 
 
+# Create Function Show Table
 def query_list_results_game():
-    worksheet = OpenSheet('Wyniki')
+    worksheet = OpenSheet(sheet_all_results)
 
     table_games_win.delete(*table_games_win.get_children())
     table_games_win.update()
