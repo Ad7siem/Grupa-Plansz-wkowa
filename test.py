@@ -129,11 +129,11 @@ w_INFO.geometry('300x180')
 w_INFO.iconbitmap('Logo klub.ico')
 
 bg = PhotoImage(file="Images/info.png")
-bg1 = PhotoImage(file="Images/tlo.png")
+# bg1 = PhotoImage(file="Images/tlo.png")
 # bg2 = PhotoImage(file="Images/tlo.jpg")
 info = PhotoImage(file='Images/informacje.png')
 
-my_label = Label(w_INFO, image=bg1)
+my_label = Label(w_INFO, image=bg)
 my_label.place(x=0, y=0, relwidth=1, relheight=1)
 
 my_button = Button(w_INFO, image=info)

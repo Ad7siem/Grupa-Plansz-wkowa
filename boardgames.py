@@ -1,6 +1,11 @@
 from tkinter import *
 from tkinter import ttk
-from sheet import OpenSheet
+from configparser import ConfigParser
+from sheet import OpenSheet, open_ini
+
+# Read our config file and get sheet
+parser = open_ini()
+sheet_all_boardgame = parser.get('sheet', 'sheet_all_boardgame')
 
 
 def Table_Board_Game(root, height=10): #, row=0, column=0, rowspan=1, columnspan=1, padx=10, pady=10, ipadx=0, ipady=0):   
@@ -42,7 +47,7 @@ def Table_Board_Game(root, height=10): #, row=0, column=0, rowspan=1, columnspan
 
 # Create Function to List Board Game 
 def query_board_game():     
-    worksheet = OpenSheet('Gry')
+    worksheet = OpenSheet(sheet_all_boardgame)
     table_board_games.delete(*table_board_games.get_children())
     table_board_games.update()
 
@@ -60,7 +65,7 @@ def search_entry(root):
 
 
 def search_item():
-    worksheet = OpenSheet('Gry')
+    worksheet = OpenSheet(sheet_all_boardgame)
     table_board_games.delete(*table_board_games.get_children())
     table_board_games.update()
     

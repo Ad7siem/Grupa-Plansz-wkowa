@@ -1,8 +1,14 @@
 from tkinter import *
 from tkinter import ttk
-from sheet import OpenSheet, List_Items
+from configparser import ConfigParser
+from sheet import OpenSheet, List_Items, open_ini
 from ttkwidgets.autocomplete import AutocompleteCombobox
 
+# Read our config file
+parser = open_ini()
+sheet_player = parser.get('sheet', 'sheet_player')
+sheet_boardgame = parser.get('sheet', 'sheet_boardgame')
+sheet_results = parser.get('sheet', 'sheet_results')
 
 # Create Function to Add Board Game
 def submit_board_game():
@@ -91,10 +97,10 @@ def submit_results_from_day():
     # print(List_Items('ID_Gry', 0)) # ====================================
 
     # Create a list for name boardgames
-    list_games = List_Items('ID_Gry', 1)
+    list_games = List_Items(sheet_boardgame, 1)
 
     # Create a list for name player
-    list_players = List_Items('ID_Gracza', 1)
+    list_players = List_Items(sheet_player, 1)
 
     global index_results_day
     global name_board_games_results_day
@@ -214,7 +220,7 @@ def append_results():
     id_lost = 0
 
     # Create search a game id
-    worksheet = OpenSheet('ID_Gry')
+    worksheet = OpenSheet(sheet_boardgame)
 
     cell = worksheet.find(name_board_games_results_day.get())
     row = worksheet.row_values(cell.row)
@@ -229,7 +235,7 @@ def append_results():
 
 
     # Create search a player id
-    worksheet = OpenSheet('ID_Gracza')
+    worksheet = OpenSheet(sheet_player)
 
     cell = worksheet.find(name_player_results_day.get())
     row = worksheet.row_values(cell.row)
@@ -246,7 +252,7 @@ def append_results():
     id_rivalry = int(quantity_players_entry.get()) - int(place_results_day.get()) + 1
 
     # Create values lost
-    worksheet = OpenSheet('Baza')
+    worksheet = OpenSheet(sheet_results)
 
 
     if result_results_day.get() == 'Wygrana':
