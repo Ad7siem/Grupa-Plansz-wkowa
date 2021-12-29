@@ -125,7 +125,7 @@ from tkinter import *
 
 w_INFO = Tk()
 w_INFO.title('Informacje')
-w_INFO.geometry('300x180')
+w_INFO.geometry('550x650')
 w_INFO.iconbitmap('Logo klub.ico')
 
 bg = PhotoImage(file="Images/info.png")
@@ -133,10 +133,32 @@ bg = PhotoImage(file="Images/info.png")
 # bg2 = PhotoImage(file="Images/tlo.jpg")
 info = PhotoImage(file='Images/informacje.png')
 
-my_label = Label(w_INFO, image=bg)
-my_label.place(x=0, y=0, relwidth=1, relheight=1)
+test_one = Frame(w_INFO)
+test_one.pack(side=TOP)
+test_two = Frame(w_INFO)
+test_two.pack(side=TOP)
 
-my_button = Button(w_INFO, image=info)
-my_button.pack()
+def isCheck():
+    my_button.pack()
+
+def Show():
+    print(c.get())
+    my_button = Button(test_two, image=info)
+    if c.get() == 1:
+        my_button.pack()
+    elif c.get() == 0:
+        my_button.destroy() 
+
+c = IntVar()
+cb = Checkbutton(w_INFO, text='Show button', variable=c)
+cb.pack()
+
+# my_label = Label(w_INFO, image=bg)
+# my_label.place(x=0, y=0, relwidth=1, relheight=1)
+
+my_button2 = Button(test_one, text='Zatwierdź', command=Show).pack()
+
+
+
 
 w_INFO.mainloop()
