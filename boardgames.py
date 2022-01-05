@@ -81,3 +81,6 @@ def cursor_board_game():
     selected = table_board_games.focus()
     values = table_board_games.item(selected, 'values')
     return values
+
+def bind_board_games():
+    table_board_games.bind("<ButtonRelease-1>", cursor_board_game)
