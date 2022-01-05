@@ -91,6 +91,7 @@ Table_Board_Games_Label.grid(row=0, column=1, rowspan=10, padx=10, pady=10)
 
 Table_Board_Game(Table_Board_Games_Label, height=40)
 
+
 # Create Table Resuls Frame
 Table_Resultat_Label = Frame(window_frame, bg=window_background)
 Table_Resultat_Label.grid(row=0, column=2, rowspan=10, padx=10)
@@ -237,5 +238,6 @@ add_json.pack(padx=10, pady=(10,2))
 # info_app = Button(Button_Info_App, text='Informacje', width=17, relief='solid', command=info)
 # info_app.pack(padx=10, pady=2)
 
+query_board_game()
 
 test.mainloop()

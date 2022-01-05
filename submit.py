@@ -14,6 +14,8 @@ button_background = parser.get('colors', 'button_background')
 button_activebackground = parser.get('colors', 'button_activebackground')
 text = parser.get('colors', 'text')
 
+
+
 # Create Function to Add Board Game
 def submit_board_game():
     global w_BG

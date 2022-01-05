@@ -1,7 +1,7 @@
 from tkinter import *
 from tkinter import ttk
 from sheet import OpenSheet, open_ini
-from boardgames import cursor_board_game
+from boardgames import cursor_board_game, query_board_game
 
 # Read our config file and get sheet, color
 parser = open_ini()
@@ -13,39 +13,41 @@ text = parser.get('colors', 'text')
 
 # Create function to update Board Game
 def edit_board_game():
+    if cursor_board_game() == '':
+        return None
     global w_EBG
     global id_board_games
     w_EBG = Tk()
     w_EBG.title('Aktualizacja')
-    w_EBG.geometry('340x350')
+    w_EBG.geometry('340x220')
     w_EBG.resizable(width=0, height=0)
     w_EBG.iconbitmap('Logo klub.ico')
     w_EBG.config(bg=window_background)
 
-    IBG_Frame = LabelFrame(w_EBG, bg=window_background)
-    IBG_Frame.pack(side=TOP, padx=10, pady=(20,5))
+    # IBG_Frame = LabelFrame(w_EBG, bg=window_background)
+    # IBG_Frame.pack(side=TOP, padx=10, pady=(20,5))
 
-    EB_Frame = Frame(w_EBG, bg=window_background)
-    EB_Frame.pack(side=TOP, padx=10, pady=5)
+    # EB_Frame = Frame(w_EBG, bg=window_background)
+    # EB_Frame.pack(side=TOP, padx=10, pady=5)
 
     BGE_Frame = LabelFrame(w_EBG, bg=window_background)
-    BGE_Frame.pack(side=TOP, padx=10, pady=5, ipady=5)
+    BGE_Frame.pack(side=TOP, padx=10, pady=15, ipady=5)
 
-    SB_Frame = Frame(w_EBG, bg=window_background)
-    SB_Frame.pack(side=TOP, padx=10, pady=5)
+    # SB_Frame = Frame(w_EBG, bg=window_background)
+    # SB_Frame.pack(side=TOP, padx=10, pady=5)
 
 
     # Create Text Box Labels
-    id_board_games_label = Label(IBG_Frame, text='Id:', bg=window_background, fg=text)
-    id_board_games_label.pack(side=LEFT, padx=10, pady=10)
+    # id_board_games_label = Label(IBG_Frame, text='Id:', bg=window_background, fg=text)
+    # id_board_games_label.pack(side=LEFT, padx=10, pady=10)
 
-     # Create Text Box
-    id_board_games = Entry(IBG_Frame, width=5)
-    id_board_games.pack(side=LEFT, padx=10, pady=10)
+    #  # Create Text Box
+    # id_board_games = Entry(IBG_Frame, width=5)
+    # id_board_games.pack(side=LEFT, padx=10, pady=10)
 
     # Create Edit Button
-    edit_btn = Button(IBG_Frame, text='Wybierz',bd=0, width=15, bg=button_background, fg=text, activebackground=button_activebackground, activeforeground=text, command=edit)
-    edit_btn.pack(side=RIGHT, padx=10, pady=10)
+    # edit_btn = Button(IBG_Frame, text='Wybierz',bd=0, width=15, bg=button_background, fg=text, activebackground=button_activebackground, activeforeground=text, command=edit)
+    # edit_btn.pack(side=RIGHT, padx=10, pady=10)
     save_btn = Button(BGE_Frame, text='Zapisz zmiany', bd=0, bg=button_background, fg=text, activebackground=button_activebackground, activeforeground=text, width=20, command=update_button)
     save_btn.grid(row=6, column=0, columnspan=2, padx=10, pady=10)
     # save_btn.pack(padx=10, pady=10)
@@ -88,8 +90,9 @@ def edit_board_game():
     owner_label_edit.grid(row=5, column=0)
 
     values = cursor_board_game()
+    # print(int(cursor_board_game()[0]))
 
-    id_board_games.insert(0, values[0])
+    # id_board_games.insert(0, values[0])
     name_board_games_edit.insert(0, values[1])
     type_board_games_edit.insert(0, values[2])
     min_player_edit.insert(0, values[3])
@@ -99,37 +102,37 @@ def edit_board_game():
     
 
 # Create function in Button Edit Board Games
-def edit():
+# def edit():
 
-    name_board_games_edit.delete(0, END)
-    type_board_games_edit.delete(0, END)
-    min_player_edit.delete(0, END)
-    max_player_edit.delete(0, END)
-    time_games_edit.delete(0, END)
-    owner_edit.delete(0, END)
+#     name_board_games_edit.delete(0, END)
+#     type_board_games_edit.delete(0, END)
+#     min_player_edit.delete(0, END)
+#     max_player_edit.delete(0, END)
+#     time_games_edit.delete(0, END)
+#     owner_edit.delete(0, END)
 
 
-    worksheet = OpenSheet(sheet_all_boardgame)
+#     worksheet = OpenSheet(sheet_all_boardgame)
 
-    records = []
-    try:
-        records = worksheet.row_values(int(id_board_games.get()) + 1)
-        name_board_games_edit.insert(0, records[1])
-        type_board_games_edit.insert(0, records[2])
-        min_player_edit.insert(0, records[3])
-        max_player_edit.insert(0, records[4])
-        time_games_edit.insert(0, records[5])
-        owner_edit.insert(0, records[6])
-    except:
-        pass
+#     records = []
+#     try:
+#         records = worksheet.row_values(int(id_board_games.get()) + 1)
+#         name_board_games_edit.insert(0, records[1])
+#         type_board_games_edit.insert(0, records[2])
+#         min_player_edit.insert(0, records[3])
+#         max_player_edit.insert(0, records[4])
+#         time_games_edit.insert(0, records[5])
+#         owner_edit.insert(0, records[6])
+#     except:
+#         pass
  
 
  # Create function to Save Update Board Games
 def update_button():
     worksheet = OpenSheet(sheet_all_boardgame)
     try:
-        worksheet.update(f'A{int(id_board_games.get())+1}:K{int(id_board_games.get())+1}', [[int(id_board_games.get()), name_board_games_edit.get(), type_board_games_edit.get(), int(min_player_edit.get()), int(max_player_edit.get()), int(time_games_edit.get()), owner_edit.get()]])
-
+        worksheet.update(f'A{int(cursor_board_game()[0])+1}:K{int(cursor_board_game()[0])+1}', [[cursor_board_game()[0], name_board_games_edit.get(), type_board_games_edit.get(), int(min_player_edit.get()), int(max_player_edit.get()), int(time_games_edit.get()), owner_edit.get()]])
+        query_board_game()
         # Close window
         w_EBG.destroy()
     except:
