@@ -7,7 +7,7 @@ parser = open_ini()
 sheet_all_boardgame = parser.get('sheet', 'sheet_all_boardgame')
 window_background = parser.get('colors', 'window_background')
 
-
+# Create Table Board Games
 def Table_Board_Game(root, height=10): #, row=0, column=0, rowspan=1, columnspan=1, padx=10, pady=10, ipadx=0, ipady=0):   
     global table_board_games
 
@@ -76,3 +76,8 @@ def search_item():
             if rec.upper() == s_entry.get().upper():
                 table_board_games.insert(parent='', index=END, values=(f'{record[0]}', f'{record[1]}', f'{record[2]}', f'{record[3]}', f'{record[4]}', f'{record[5]}', f'{record[6]}'))
     
+
+def cursor_board_game():
+    selected = table_board_games.focus()
+    values = table_board_games.item(selected, 'values')
+    return values

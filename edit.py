@@ -1,6 +1,7 @@
 from tkinter import *
 from tkinter import ttk
 from sheet import OpenSheet, open_ini
+from boardgames import cursor_board_game
 
 # Read our config file and get sheet, color
 parser = open_ini()
@@ -34,19 +35,20 @@ def edit_board_game():
     SB_Frame.pack(side=TOP, padx=10, pady=5)
 
 
-    # Create Text Box
-    id_board_games = Entry(IBG_Frame, width=20)
-    id_board_games.pack(side=RIGHT, padx=10, pady=10)
-
     # Create Text Box Labels
     id_board_games_label = Label(IBG_Frame, text='Id:', bg=window_background, fg=text)
     id_board_games_label.pack(side=LEFT, padx=10, pady=10)
 
+     # Create Text Box
+    id_board_games = Entry(IBG_Frame, width=5)
+    id_board_games.pack(side=LEFT, padx=10, pady=10)
+
     # Create Edit Button
-    edit_btn = Button(EB_Frame, text='Wybierz',bd=0, width=20, bg=button_background, fg=text, activebackground=button_activebackground, activeforeground=text, command=edit)
-    edit_btn.pack(padx=10, pady=10)
-    save_btn = Button(SB_Frame, text='Zapisz zmiany', bd=0, bg=button_background, fg=text, activebackground=button_activebackground, activeforeground=text, width=20, command=update_button)
-    save_btn.pack(padx=10, pady=10)
+    edit_btn = Button(IBG_Frame, text='Wybierz',bd=0, width=15, bg=button_background, fg=text, activebackground=button_activebackground, activeforeground=text, command=edit)
+    edit_btn.pack(side=RIGHT, padx=10, pady=10)
+    save_btn = Button(BGE_Frame, text='Zapisz zmiany', bd=0, bg=button_background, fg=text, activebackground=button_activebackground, activeforeground=text, width=20, command=update_button)
+    save_btn.grid(row=6, column=0, columnspan=2, padx=10, pady=10)
+    # save_btn.pack(padx=10, pady=10)
 
     # Create Global Variables for next box names
     global name_board_games_edit
@@ -58,7 +60,7 @@ def edit_board_game():
 
     # Create Text Boxes
     name_board_games_edit = Entry(BGE_Frame, width=30)
-    name_board_games_edit.grid(row=0, column=1, padx=10, pady=(10,0))
+    name_board_games_edit.grid(row=0, column=1, padx=10, pady=(8,0))
     type_board_games_edit = Entry(BGE_Frame, width=30)
     type_board_games_edit.grid(row=1, column=1)
     min_player_edit = Entry(BGE_Frame, width=30)
@@ -73,7 +75,7 @@ def edit_board_game():
 
     # Create Text Box Labels
     name_board_games_label_edit = Label(BGE_Frame, text='Nazwa Gry:', padx=(10), bg=window_background, fg=text)
-    name_board_games_label_edit.grid(row=0, column=0, pady=(5,0))
+    name_board_games_label_edit.grid(row=0, column=0, pady=(8,0))
     type_board_games_label_edit = Label(BGE_Frame, text='Typ:', bg=window_background, fg=text)
     type_board_games_label_edit.grid(row=1, column=0)
     min_player_label_edit = Label(BGE_Frame, text='Min. graczy', bg=window_background, fg=text)
@@ -84,10 +86,29 @@ def edit_board_game():
     time_games_label_edit.grid(row=4, column=0)
     owner_label_edit = Label(BGE_Frame, text='Właściciel:', bg=window_background, fg=text)
     owner_label_edit.grid(row=5, column=0)
+
+    values = cursor_board_game()
+
+    id_board_games.insert(0, values[0])
+    name_board_games_edit.insert(0, values[1])
+    type_board_games_edit.insert(0, values[2])
+    min_player_edit.insert(0, values[3])
+    max_player_edit.insert(0, values[4])
+    time_games_edit.insert(0, values[5])
+    owner_edit.insert(0, values[6])
     
 
 # Create function in Button Edit Board Games
 def edit():
+
+    name_board_games_edit.delete(0, END)
+    type_board_games_edit.delete(0, END)
+    min_player_edit.delete(0, END)
+    max_player_edit.delete(0, END)
+    time_games_edit.delete(0, END)
+    owner_edit.delete(0, END)
+
+
     worksheet = OpenSheet(sheet_all_boardgame)
 
     records = []
