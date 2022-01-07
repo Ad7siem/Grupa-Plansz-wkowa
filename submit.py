@@ -15,10 +15,9 @@ button_activebackground = parser.get('colors', 'button_activebackground')
 text = parser.get('colors', 'text')
 
 
-
 # Create Function to Add Board Game
 def submit_board_game():
-    global w_BG
+    # global w_BG
     w_BG = Tk()
     w_BG.title('Dodawanie gry planszowej')
     w_BG.iconbitmap('Logo klub.ico')
@@ -92,11 +91,11 @@ def save():
 
 # Create Function append results day
 def submit_results_from_day():
-    global w_RFD
+    # global w_RFD
     w_RFD = Tk()
     w_RFD.title('Dodawanie wyników dnia')
-    w_RFD.geometry('550x250')
-    w_RFD.resizable(width=0, height=0)
+    w_RFD.geometry('550x570')
+    # w_RFD.resizable(width=0, height=0)
     w_RFD.iconbitmap('Logo klub.ico')
     w_RFD.config(bg=window_background)
 
@@ -112,78 +111,65 @@ def submit_results_from_day():
     global game_data_m
     global game_data_y
 
-    # Create Result LabelFrame
-    global window_with_entering_results
-    window_with_entering_results = LabelFrame(w_RFD, text='Dodaj resultat dnia', bg=window_background, fg=text)
-    window_with_entering_results.pack(padx=10, pady=10, ipady=5)
+    window_gameplay_data_LabelFrame = LabelFrame(w_RFD, bg=window_background, fg=text)
+    window_gameplay_data_LabelFrame.pack(side=TOP, padx=10, pady=10)
 
-    # Create Frame First Items
-    first_data = Frame(window_with_entering_results, bg=window_background)
-    first_data.pack(side=TOP)
+    window_gameplay_data = Label(window_gameplay_data_LabelFrame, bg=window_background, fg=text)
+    window_gameplay_data.pack(side=TOP, padx=10, pady=10)
 
-    row_one_first_data = Frame(first_data, bg=window_background)
-    row_one_first_data.pack(side=TOP)
-    row_two_first_data = Frame(first_data, bg=window_background)
-    row_two_first_data.pack(side=TOP)
+    window_with_gameplay_results_LabelFrame = LabelFrame(w_RFD, bg=window_background, fg=text)
+    window_with_gameplay_results_LabelFrame.pack(side=TOP, padx=10, pady=10)
+
+    window_with_gameplay_results = Label(window_with_gameplay_results_LabelFrame, bg=window_background, fg=text)
+    window_with_gameplay_results.pack(side=TOP, padx=10, pady=10)
 
     # Create Quantity Players
-    quantity_players_label = Label(row_one_first_data, text='Podaj ilość graczy w grze:', bg=window_background, fg=text)
-    quantity_players_label.pack(side=LEFT, padx=(10,2), pady=10)
+    quantity_players_label = Label(window_gameplay_data, text='Podaj ilość graczy w grze:', bg=window_background, fg=text)
+    quantity_players_label.grid(row=0, column=0, sticky=W)
 
+    # global quantity_players_entry
     global quantity_players_entry
-    quantity_players_entry = Entry(row_one_first_data, width=3)
-    quantity_players_entry.pack(side=LEFT, padx=(2,10), pady=10)
+    quantity_players_entry = Entry(window_gameplay_data, width=3)
+    quantity_players_entry.grid(row=0, column=1)
 
     # Create Game Data
-    game_data_label = Label(row_one_first_data, text='Podaj date rozgrywki (d/m/r):', bg=window_background, fg=text)
-    game_data_label.pack(side=LEFT, padx=10, pady=10)
+    game_data_label = Label(window_gameplay_data, text='Podaj date rozgrywki (d/m/r):', bg=window_background, fg=text)
+    game_data_label.grid(row=1, column=0, sticky=W)
 
-    game_data_d = Entry(row_one_first_data, width=3)
-    game_data_d.pack(side=LEFT, padx=(5,0), pady=10)
-    first_other_text = Label(row_one_first_data, text='-', bg=window_background, fg=text)
-    first_other_text.pack(side=LEFT, pady=10)
-    game_data_m = Entry(row_one_first_data, width=3)
-    game_data_m.pack(side=LEFT, padx=0, pady=10)
-    second_other_text = Label(row_one_first_data, text='-', bg=window_background, fg=text)
-    second_other_text.pack(side=LEFT, pady=10)
-    game_data_y = Entry(row_one_first_data, width=5)
-    game_data_y.pack(side=LEFT, padx=(0,10), pady=10)
+    game_data_d = Entry(window_gameplay_data, width=3)
+    game_data_d.grid(row=1, column=1)
+    first_other_text = Label(window_gameplay_data, text='-', bg=window_background, fg=text)
+    first_other_text.grid(row=1, column=2)
+    game_data_m = Entry(window_gameplay_data, width=3)
+    game_data_m.grid(row=1, column=3)
+    second_other_text = Label(window_gameplay_data, text='-', bg=window_background, fg=text)
+    second_other_text.grid(row=1, column=4)
+    game_data_y = Entry(window_gameplay_data, width=5)
+    game_data_y.grid(row=1, column=5)
 
     # Create Index Game Result in Day
-    index_results_day_label = Label(row_two_first_data, text='Liczba Porządkowa:', bg=window_background, fg=text)
-    index_results_day_label.pack(side=LEFT, padx=(10,2), pady=10)
+    index_results_day_label = Label(window_gameplay_data, text='Numer rozgrywki:', bg=window_background, fg=text)
+    index_results_day_label.grid(row=2, column=0, sticky=W)
 
-    index_results_day = Entry(row_two_first_data, width=4)
-    index_results_day.pack(side=LEFT, padx=(2,10), pady=10)
+    index_results_day = Entry(window_gameplay_data, width=3)
+    index_results_day.grid(row=2, column=1)
 
     # Create Name Game Bord
-    name_board_games_results_day_label = Label(row_two_first_data, text='Nazwa gry:', bg=window_background, fg=text)
-    name_board_games_results_day_label.pack(side=LEFT, padx=(10,2), pady=10)
+    name_board_games_results_day_label = Label(window_gameplay_data, text='Nazwa gry:', bg=window_background, fg=text)
+    name_board_games_results_day_label.grid(row=3, column=0, sticky=W)
+    name_board_games_results_day = AutocompleteCombobox(window_gameplay_data, width=40, completevalues=list_games)
+    name_board_games_results_day.grid(row=3, column=1, columnspan=60)
 
-    name_board_games_results_day = AutocompleteCombobox(row_two_first_data, width=40, completevalues=list_games)
-    name_board_games_results_day.pack(side=LEFT, padx=(2,10), pady=10)
-
-    # Create Frame with Second Items
-    second_data = Frame(window_with_entering_results, bg=window_background)
-    second_data.pack(side=TOP)
-
-    # Create Frame with Label Second Items
-    window_label = Frame(second_data, bg=window_background)
-    window_label.pack(side=TOP, padx=10, pady=(10,0))
-
-    place_results_day_label = Label(window_label, text='Miejsce', bg=button_activebackground, fg=text, width=10)
+    # Create ...
+    place_results_day_label = Label(window_with_gameplay_results, text='Miejsce', bg=button_activebackground, fg=text, width=10)
     place_results_day_label.grid(row=0, column=0)
-    name_player_results_day_label = Label(window_label, text='Nazwa Gracza', bg=button_activebackground, fg=text, width=20)
+    name_player_results_day_label = Label(window_with_gameplay_results, text='Nazwa Gracza', bg=button_activebackground, fg=text, width=20)
     name_player_results_day_label.grid(row=0, column=1)
-    points_results_day_label = Label(window_label, text='Punktacja', bg=button_activebackground, fg=text, width=10)
+    points_results_day_label = Label(window_with_gameplay_results, text='Punktacja', bg=button_activebackground, fg=text, width=10)
     points_results_day_label.grid(row=0, column=2)
-    result_results_day_label = Label(window_label, text='Rezultat', bg=button_activebackground, fg=text, width=20)
+    result_results_day_label = Label(window_with_gameplay_results, text='Rezultat', bg=button_activebackground, fg=text, width=20)
     result_results_day_label.grid(row=0, column=3)
 
-    # Create Frame for a Table Second Items
-    global window_entry
-    window_entry = Frame(second_data, bg=window_background)
-    window_entry.pack(side=TOP, padx=0, pady=(0, 10))
 
     global place_results_day
     global name_player_results_day
@@ -191,30 +177,149 @@ def submit_results_from_day():
     global points_results_day
 
     # Create a list for results of day
-    global vlist
+    # global vlist
     vlist = ['Wygrana','Przegrana', 'Zmywanie']
 
     # Create Entry with Label Second Items
-    place_results_day = Entry(window_entry, width=12, justify=CENTER)
-    place_results_day.grid(row=0, column=0)
+    place_results_day = Entry(window_with_gameplay_results, width=12, justify=CENTER)
+    place_results_day.grid(row=1, column=0)
+    name_player_results_day = AutocompleteCombobox(window_with_gameplay_results, width=20, justify=CENTER, completevalues=list_players)
+    name_player_results_day.grid(row=1, column=1)
+    points_results_day = Entry(window_with_gameplay_results, width=12, justify=CENTER)
+    points_results_day.grid(row=1, column=2)
+    result_results_day = AutocompleteCombobox(window_with_gameplay_results, width=20, completevalues=vlist)
+    result_results_day.grid(row=1, column=3)
 
-    name_player_results_day = AutocompleteCombobox(window_entry, width=24, justify=CENTER, completevalues=list_players)
-    name_player_results_day.grid(row=0, column=1)
-    points_results_day = Entry(window_entry, width=12, justify=CENTER)
-    points_results_day.grid(row=0, column=2)
+    # place_results_day_1 = Entry(window_with_gameplay_results, width=12, justify=CENTER)
+    # place_results_day_1.grid(row=2, column=0)
+    # name_player_results_day_1 = AutocompleteCombobox(window_with_gameplay_results, width=20, justify=CENTER, completevalues=list_players)
+    # name_player_results_day_1.grid(row=2, column=1)
+    # points_results_day_1 = Entry(window_with_gameplay_results, width=12, justify=CENTER)
+    # points_results_day_1.grid(row=2, column=2)
+    # result_results_day_1 = AutocompleteCombobox(window_with_gameplay_results, width=20, completevalues=vlist)
+    # result_results_day_1.grid(row=2, column=3)
 
-    result_results_day = AutocompleteCombobox(window_entry, width=20, completevalues=vlist)
-    result_results_day.grid(row=0, column=3)
+    # place_results_day_2 = Entry(window_with_gameplay_results, width=12, justify=CENTER)
+    # place_results_day_2.grid(row=3, column=0)
+    # name_player_results_day_2 = AutocompleteCombobox(window_with_gameplay_results, width=20, justify=CENTER, completevalues=list_players)
+    # name_player_results_day_2.grid(row=3, column=1)
+    # points_results_day_2 = Entry(window_with_gameplay_results, width=12, justify=CENTER)
+    # points_results_day_2.grid(row=3, column=2)
+    # result_results_day_2 = AutocompleteCombobox(window_with_gameplay_results, width=20, completevalues=vlist)
+    # result_results_day_2.grid(row=3, column=3)
 
-    info_lost_Frame = Frame(window_with_entering_results, bg=window_background)
-    info_lost_Frame.pack(side=TOP)
+    # place_results_day_3 = Entry(window_with_gameplay_results, width=12, justify=CENTER)
+    # place_results_day_3.grid(row=4, column=0)
+    # name_player_results_day_3 = AutocompleteCombobox(window_with_gameplay_results, width=20, justify=CENTER, completevalues=list_players)
+    # name_player_results_day_3.grid(row=4, column=1)
+    # points_results_day_3 = Entry(window_with_gameplay_results, width=12, justify=CENTER)
+    # points_results_day_3.grid(row=4, column=2)
+    # result_results_day_3 = AutocompleteCombobox(window_with_gameplay_results, width=20, completevalues=vlist)
+    # result_results_day_3.grid(row=4, column=3)
 
-    append_button = Frame(window_with_entering_results, bg=window_background)
-    append_button.pack(side=TOP)
+    # place_results_day_4 = Entry(window_with_gameplay_results, width=12, justify=CENTER)
+    # place_results_day_4.grid(row=5, column=0)
+    # name_player_results_day_4 = AutocompleteCombobox(window_with_gameplay_results, width=20, justify=CENTER, completevalues=list_players)
+    # name_player_results_day_4.grid(row=5, column=1)
+    # points_results_day_4 = Entry(window_with_gameplay_results, width=12, justify=CENTER)
+    # points_results_day_4.grid(row=5, column=2)
+    # result_results_day_4 = AutocompleteCombobox(window_with_gameplay_results, width=20, completevalues=vlist)
+    # result_results_day_4.grid(row=5, column=3)
+
+    # place_results_day_5 = Entry(window_with_gameplay_results, width=12, justify=CENTER)
+    # place_results_day_5.grid(row=6, column=0)
+    # name_player_results_day_5 = AutocompleteCombobox(window_with_gameplay_results, width=20, justify=CENTER, completevalues=list_players)
+    # name_player_results_day_5.grid(row=6, column=1)
+    # points_results_day_5 = Entry(window_with_gameplay_results, width=12, justify=CENTER)
+    # points_results_day_5.grid(row=6, column=2)
+    # result_results_day_5 = AutocompleteCombobox(window_with_gameplay_results, width=20, completevalues=vlist)
+    # result_results_day_5.grid(row=6, column=3)
+
+    # place_results_day_6 = Entry(window_with_gameplay_results, width=12, justify=CENTER)
+    # place_results_day_6.grid(row=7, column=0)
+    # name_player_results_day_6 = AutocompleteCombobox(window_with_gameplay_results, width=20, justify=CENTER, completevalues=list_players)
+    # name_player_results_day_6.grid(row=7, column=1)
+    # points_results_day_6 = Entry(window_with_gameplay_results, width=12, justify=CENTER)
+    # points_results_day_6.grid(row=7, column=2)
+    # result_results_day_6 = AutocompleteCombobox(window_with_gameplay_results, width=20, completevalues=vlist)
+    # result_results_day_6.grid(row=7, column=3)
+
+    # place_results_day_7 = Entry(window_with_gameplay_results, width=12, justify=CENTER)
+    # place_results_day_7.grid(row=8, column=0)
+    # name_player_results_day_7 = AutocompleteCombobox(window_with_gameplay_results, width=20, justify=CENTER, completevalues=list_players)
+    # name_player_results_day_7.grid(row=8, column=1)
+    # points_results_day_7 = Entry(window_with_gameplay_results, width=12, justify=CENTER)
+    # points_results_day_7.grid(row=8, column=2)
+    # result_results_day_7 = AutocompleteCombobox(window_with_gameplay_results, width=20, completevalues=vlist)
+    # result_results_day_7.grid(row=8, column=3)
+
+    # place_results_day_8 = Entry(window_with_gameplay_results, width=12, justify=CENTER)
+    # place_results_day_8.grid(row=9, column=0)
+    # name_player_results_day_8 = AutocompleteCombobox(window_with_gameplay_results, width=20, justify=CENTER, completevalues=list_players)
+    # name_player_results_day_8.grid(row=9, column=1)
+    # points_results_day_8 = Entry(window_with_gameplay_results, width=12, justify=CENTER)
+    # points_results_day_8.grid(row=9, column=2)
+    # result_results_day_8 = AutocompleteCombobox(window_with_gameplay_results, width=20, completevalues=vlist)
+    # result_results_day_8.grid(row=9, column=3)
+
+    # place_results_day_9 = Entry(window_with_gameplay_results, width=12, justify=CENTER)
+    # place_results_day_9.grid(row=10, column=0)
+    # name_player_results_day_9 = AutocompleteCombobox(window_with_gameplay_results, width=20, justify=CENTER, completevalues=list_players)
+    # name_player_results_day_9.grid(row=10, column=1)
+    # points_results_day_9 = Entry(window_with_gameplay_results, width=12, justify=CENTER)
+    # points_results_day_9.grid(row=10, column=2)
+    # result_results_day_9 = AutocompleteCombobox(window_with_gameplay_results, width=20, completevalues=vlist)
+    # result_results_day_9.grid(row=10, column=3)
+
+    # place_results_day_10 = Entry(window_with_gameplay_results, width=12, justify=CENTER)
+    # place_results_day_10.grid(row=11, column=0)
+    # name_player_results_day_10 = AutocompleteCombobox(window_with_gameplay_results, width=20, justify=CENTER, completevalues=list_players)
+    # name_player_results_day_10.grid(row=11, column=1)
+    # points_results_day_10 = Entry(window_with_gameplay_results, width=12, justify=CENTER)
+    # points_results_day_10.grid(row=11, column=2)
+    # result_results_day_10 = AutocompleteCombobox(window_with_gameplay_results, width=20, completevalues=vlist)
+    # result_results_day_10.grid(row=11, column=3)
+
+    # place_results_day_11 = Entry(window_with_gameplay_results, width=12, justify=CENTER)
+    # place_results_day_11.grid(row=12, column=0)
+    # name_player_results_day_11 = AutocompleteCombobox(window_with_gameplay_results, width=20, justify=CENTER, completevalues=list_players)
+    # name_player_results_day_11.grid(row=12, column=1)
+    # points_results_day_11 = Entry(window_with_gameplay_results, width=12, justify=CENTER)
+    # points_results_day_11.grid(row=12, column=2)
+    # result_results_day_11 = AutocompleteCombobox(window_with_gameplay_results, width=20, completevalues=vlist)
+    # result_results_day_11.grid(row=12, column=3)
+
+    # place_results_day_12 = Entry(window_with_gameplay_results, width=12, justify=CENTER)
+    # place_results_day_12.grid(row=13, column=0)
+    # name_player_results_day_12 = AutocompleteCombobox(window_with_gameplay_results, width=20, justify=CENTER, completevalues=list_players)
+    # name_player_results_day_12.grid(row=13, column=1)
+    # points_results_day_12 = Entry(window_with_gameplay_results, width=12, justify=CENTER)
+    # points_results_day_12.grid(row=13, column=2)
+    # result_results_day_12 = AutocompleteCombobox(window_with_gameplay_results, width=20, completevalues=vlist)
+    # result_results_day_12.grid(row=13, column=3)
+
+    # place_results_day_13 = Entry(window_with_gameplay_results, width=12, justify=CENTER)
+    # place_results_day_13.grid(row=14, column=0)
+    # name_player_results_day_13 = AutocompleteCombobox(window_with_gameplay_results, width=20, justify=CENTER, completevalues=list_players)
+    # name_player_results_day_13.grid(row=14, column=1)
+    # points_results_day_13 = Entry(window_with_gameplay_results, width=12, justify=CENTER)
+    # points_results_day_13.grid(row=14, column=2)
+    # result_results_day_13 = AutocompleteCombobox(window_with_gameplay_results, width=20, completevalues=vlist)
+    # result_results_day_13.grid(row=14, column=3)
+
+    # place_results_day_14 = Entry(window_with_gameplay_results, width=12, justify=CENTER)
+    # place_results_day_14.grid(row=15, column=0)
+    # name_player_results_day_14 = AutocompleteCombobox(window_with_gameplay_results, width=20, justify=CENTER, completevalues=list_players)
+    # name_player_results_day_14.grid(row=15, column=1)
+    # points_results_day_14 = Entry(window_with_gameplay_results, width=12, justify=CENTER)
+    # points_results_day_14.grid(row=15, column=2)
+    # result_results_day_14 = AutocompleteCombobox(window_with_gameplay_results, width=20, completevalues=vlist)
+    # result_results_day_14.grid(row=15, column=3)
+
 
     # Create Button Save Results Day
-    a_button = Button(append_button, text='Zapisz',bd=0, bg=button_background, width=20, command=append_results)
-    a_button.pack(side=BOTTOM, padx=10, pady=10)
+    a_button = Button(w_RFD, text='Zapisz', width=20, bd=0, bg=button_background, fg=text, activebackground=button_activebackground, activeforeground=text, command=append_results)
+    a_button.pack(side=BOTTOM, padx=10, pady=(0,20))
 
 
 def append_results():
@@ -230,27 +335,12 @@ def append_results():
     row = worksheet.row_values(cell.row)
     id_game = row[1]
 
-    # records = []
-    # records = worksheet.get_all_values()
-    # for record in records:
-    #     if record[0].lower() == name_board_games_results_day.get().lower():
-    #         id_game = record[1]
-    #         break
-
-
     # Create search a player id
     worksheet = OpenSheet(sheet_player)
 
     cell = worksheet.find(name_player_results_day.get())
     row = worksheet.row_values(cell.row)
     id_player = row[2]
-
-    # records = []
-    # records = worksheet.get_all_values()
-    # for record in records:
-    #     if record[0].lower() == name_player_results_day.get().lower():
-    #         id_player = record[2]
-    #         break
 
     # Create values points
     id_rivalry = int(quantity_players_entry.get()) - int(place_results_day.get()) + 1
@@ -279,6 +369,8 @@ def append_results():
         int(f'{id_lost}'),
         f'{result_results_day.get()}',
         f'{game_data_d.get()}-{game_data_m.get()}-{game_data_y.get()}']
+    print(temporary_list_results)
+
 
     worksheet.append_row(temporary_list_results)
 

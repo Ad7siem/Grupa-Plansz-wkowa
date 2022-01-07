@@ -233,11 +233,7 @@ add_json = Button(
         command=config_app)
 add_json.pack(padx=10, pady=(10,2))
 
-# Create Window Info App
-# photo = PhotoImage('./info.png')
-# info_app = Button(Button_Info_App, text='Informacje', width=17, relief='solid', command=info)
-# info_app.pack(padx=10, pady=2)
 
-query_board_game()
+# query_board_game()
 
 test.mainloop()
